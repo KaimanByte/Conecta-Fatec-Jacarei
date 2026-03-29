@@ -1,39 +1,51 @@
 # Autoatendimento Secretaria Acadêmica - Fatec Jacareí
 
-Projeto base para o desafio ABP 2026-1 do 2º semestre do curso de DSM.
+<p align="center">
+  <img src="./arquivos/imagens/LogoKaymanByte.png"
+       alt="Sai fora"
+       style="max-width: 260px; width: 60%; height: auto;">
+</p>
 
-## Tema do Semestre
+<p align="center">
+  <a href="#descrição-do-projeto">Sobre o Projeto</a> |
+  <a href="#entregas-de-sprints">Entrega de Sprints</a> |
+  <a href="#recursos-do-produto">Recursos do Produto</a> |
+  <a href="#equipe">Nossa Equipe</a>
+</p>
 
-Aplicação Web para Autoatendimento da Secretaria Acadêmica da Fatec Jacareí.
+## Descrição do Projeto
 
-## Desafio (problema)
+A Secretaria Acadêmica da Fatec Jacareí recebe diariamente um grande volume de dúvidas recorrentes de alunos e interessados externos, o que gera sobrecarga operacional, aumento no tempo de resposta e risco de inconsistências nas orientações — especialmente em períodos críticos como rematrícula, trancamentos e exames finais.
 
-A Secretaria Acadêmica da Fatec Jacareí recebe, de forma recorrente, dúvidas de alunos e de interessados externos, especialmente relacionadas a:
+Para resolver esse problema, desenvolvemos uma aplicação web de autoatendimento baseada em um chatbot conversacional. O sistema guia o usuário por uma árvore de navegação estruturada com menus e perguntas guiadas, cobrindo os temas mais frequentes: horários de aulas, calendário acadêmico, estágio supervisionado, dispensas e aproveitamento de disciplinas, e estrutura curricular dos cursos.
 
-- Horários de aulas;
-- Datas do calendário acadêmico;
-- Regras de dispensa e aproveitamento de disciplinas;
-- Estágio supervisionado;
-- Estrutura curricular dos cursos (AACC, TG/TCC, obrigatoriedade e carga horária).
+Ao final de cada atendimento, o sistema apresenta uma resposta objetiva e padronizada, acompanhada — quando aplicável — de um trecho extraído diretamente de documentos oficiais como o Regulamento Geral das Fatecs, o Manual de Estágio, o Calendário Acadêmico e os PPCs dos cursos. Essa abordagem garante rastreabilidade, confiabilidade da informação e redução de ambiguidades no atendimento.
 
-Esse cenário gera sobrecarga operacional, aumento no tempo de resposta e possíveis inconsistências nas orientações fornecidas, principalmente em períodos críticos do semestre, como rematrícula, ajustes de matrícula, trancamentos e exames finais.
+<a id="sprint"></a>
+## Entregas de Sprints
 
-O desafio proposto consiste no desenvolvimento de uma aplicação web de autoatendimento, baseada em um modelo de chatbot conversacional, capaz de:
+Todas as entregas serão realizadas conforme os prazos acordados com o cliente. Para cada ciclo de desenvolvimento, será gerado um relatório completo por sprint e uma planilha de tarefas, na aba **Tasks**, que detalha cada atividade executada, o responsável, a data de conclusão e uma descrição do trabalho realizado. A relação detalhada das sprints e tarefas é apresentada abaixo.
 
-- Conduzir o usuário por uma árvore de navegação estruturada (menus e perguntas guiadas);
-- Permitir consultas diretas;
-- Fornecer respostas objetivas, padronizadas e verificáveis.
+<div align="center">
 
-Ao final de cada atendimento, o sistema deverá apresentar:
+| Sprint | Entrega       | Status |                 Relatório                  |                Apresentação                |
+|------: |---------------|:------:|:------------------------------------------:|:------------------------------------------:|
+| 1      | 📅 Em definição | 🚧     | [Ver Backlog](./documentação/sprints/sprint_1.md) | [Apresentação](https://youtu.be/PMBobDD5Eb4) |
+| 2      | 📅 Em definição | —     | [Ver Backlog](./documentação/sprints/sprint_2.md) | [Apresentação](https://youtu.be/u_ALKMT5F3A) |
+| 3      | 📅 Em definição | —     | [Ver Backlog](./documentação/sprints/sprint_3.md) | [Apresentação](https://youtu.be/jQnsITIP0jw) |
 
-- Uma resposta resumida e clara;
-- Quando aplicável, um trecho de evidência extraído de documentos oficiais, tais como:
-  - Regulamento Geral dos Cursos Superiores das Fatecs;
-  - Manual de Estágio;
-  - Calendário Acadêmico;
-  - PPC e horários dos cursos.
+</div>
 
-Essa abordagem garante rastreabilidade, confiabilidade da informação e redução de ambiguidades.
+**Legenda:**
+- ✅ **Finalizada**
+- 🚧 **Em Progresso**
+- `—` **Não iniciado**
+
+## Recursos do Produto 
+
+- **Requisitos do Produto com DoD e DoR:** [Acesse aqui](./arquivos/processos/produto.md)
+Detalhamento completo dos requisitos funcionais e não funcionais do projeto, incluindo User Stories, critérios de entrada (DoR) e critérios de conclusão (DoD) de cada requisito.
+
 
 ## Stack
 
@@ -41,6 +53,18 @@ Essa abordagem garante rastreabilidade, confiabilidade da informação e reduç�
 - Backend: Node.js + TypeScript + Express + JWT
 - Banco de Dados: PostgreSQL
 - Orquestração: Docker Compose
+
+## Equipe
+
+| Nome | Função | GitHub | LinkedIn |
+|------|--------|--------|----------|
+| Thiago Guedes | Product Owner | [Github](https://github.com/Thiago-Tolosa) | [LinkedIn](https://www.linkedin.com/in/thiago-guedes-4965b0390?utm_source=share_via&utm_content=profile&utm_medium=member_android) |
+| João Pedro | Scrum Master | [Github](https://github.com/JoaoPedroLuvisariSeveriano) | [LinkedIn](https://www.linkedin.com/in/jo%C3%A3o-pedro-luvisari-severiano-bb1aa9303/) |
+| Erick Rost | Desenvolvedor | [Github](https://github.com/erickrost) | [LinkedIn](https://www.linkedin.com/in/erick-rost/) |
+| Vitória Vargas | Desenvolvedor | [Github](https://github.com/vitvargas) | [LinkedIn](http://www.linkedin.com/in/vit%C3%B3ria-barbara-vargas-9b920b351) |
+| Rafael Melo | Desenvolvedor | [Github](https://github.com/RafaelPMR) | [LinkedIn](https://www.linkedin.com/in/rafael-prado-de-melo-raimundo-55a150144?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app) |
+| Gabriel Oliveira | Desenvolvddor  | [Github](https://github.com/GabrielOlsa) | [LinkedIn](https://www.linkedin.com/in/gabriel-oliveira-96013138b?utm_source=share_via&utm_content=profile&utm_medium=member_android) |
+
 
 ## Estrutura
 
