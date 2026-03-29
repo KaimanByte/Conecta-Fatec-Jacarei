@@ -24,15 +24,15 @@ Ao final de cada atendimento, o sistema apresenta uma resposta objetiva e padron
 <a id="sprint"></a>
 ## Entregas de Sprints
 
-Todas as entregas serão realizadas conforme os prazos acordados com o cliente. Para cada ciclo de desenvolvimento, será gerado um relatório completo por sprint e uma planilha de tarefas, na aba **Tasks**, que detalha cada atividade executada, o responsável, a data de conclusão e uma descrição do trabalho realizado. A relação detalhada das sprints e tarefas é apresentada abaixo.
+Todas as entregas serão realizadas conforme os prazos acordados com o cliente. Para cada ciclo de desenvolvimento, será gerado um relatório completo por sprint e uma planilha de tarefas, na aba **Tasks**. A relação detalhada das sprints e tarefas é apresentada abaixo.
 
 <div align="center">
 
 | Sprint | Entrega       | Status |                 Relatório                  |                Apresentação                |
 |------: |---------------|:------:|:------------------------------------------:|:------------------------------------------:|
-| 1      | 📅 Em definição | 🚧     | [Ver Backlog](./documentação/sprints/sprint_1.md) | [Apresentação](https://youtu.be/PMBobDD5Eb4) |
-| 2      | 📅 Em definição | —     | [Ver Backlog](./documentação/sprints/sprint_2.md) | [Apresentação](https://youtu.be/u_ALKMT5F3A) |
-| 3      | 📅 Em definição | —     | [Ver Backlog](./documentação/sprints/sprint_3.md) | [Apresentação](https://youtu.be/jQnsITIP0jw) |
+| 1      | 📅 Em definição | 🚧     | Em definição | - |
+| 2      | 📅 Em definição | `—`     | - | - |
+| 3      | 📅 Em definição | `—`     | - | - |
 
 </div>
 
@@ -43,8 +43,10 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 
 ## Recursos do Produto 
 
-- **Requisitos do Produto com DoD e DoR:** [Acesse aqui](./arquivos/processos/requisitos.md)
+- **Requisitos do Produto com DoD e DoR:** [Acesse aqui](./arquivos/produto/requisitos.md)
 Detalhamento completo dos requisitos funcionais e não funcionais do projeto, incluindo User Stories, critérios de entrada (DoR) e critérios de conclusão (DoD) de cada requisito.
+- **Backlog de Tasks:** [Acesse aqui](./arquivos/produto/backlog.md)
+Lista completa de tasks do projeto, com identificador, descrição da atividade, pontuação em Fibonacci e rastreabilidade com os requisitos atendidos.
 
 
 ## Stack
