@@ -43,7 +43,7 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 
 ## Recursos do Produto 
 
-- **Requisitos do Produto com DoD e DoR:** [Acesse aqui](./arquivos/processos/produto.md)
+- **Requisitos do Produto com DoD e DoR:** [Acesse aqui](./arquivos/processos/requisitos.md)
 Detalhamento completo dos requisitos funcionais e não funcionais do projeto, incluindo User Stories, critérios de entrada (DoR) e critérios de conclusão (DoD) de cada requisito.
 
 
