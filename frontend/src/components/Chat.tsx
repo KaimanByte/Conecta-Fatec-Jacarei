@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import api from '../utils/api';
 import { toast } from 'sonner';
-import './Chat.css'
 interface ChatNode {
   id: number;
   title: string;
