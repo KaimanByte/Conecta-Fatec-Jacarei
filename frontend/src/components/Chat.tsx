@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import api from '../utils/api';
 import { toast } from 'sonner';
-
+import './Chat.css'
 interface ChatNode {
   id: number;
   title: string;
@@ -57,52 +57,47 @@ function InquiryForm({ sessionId, onSent, onCancel }: { sessionId: string; onSen
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
-      <p className="text-sm text-gray-600 font-medium">Preencha para enviar sua dúvida à secretaria:</p>
-      <div>
-        <label className="block text-xs font-medium text-gray-700 mb-1">Nome completo *</label>
+    <form onSubmit={handleSubmit} className="inquiry-form">
+      <p className="form-title">Preencha para enviar sua dúvida à secretaria:</p>
+      <div className="form-group">
+        <label className="form-label">Nome completo *</label>
         <input
           required value={name} onChange={e => setName(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+          className="input-field"
           placeholder="Seu nome"
         />
       </div>
-      <div>
-        <label className="block text-xs font-medium text-gray-700 mb-1">E-mail *</label>
+      <div className="form-group">
+        <label className="form-label">E-mail *</label>
         <input
           required type="email" value={email} onChange={e => setEmail(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+          className="input-field"
           placeholder="seu@email.com"
         />
       </div>
-      <div>
-        <label className="block text-xs font-medium text-gray-700 mb-1">Dúvida *</label>
+      <div className="form-group">
+        <label className="form-label">Dúvida *</label>
         <textarea
           required value={question} onChange={e => setQuestion(e.target.value)}
           rows={3}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-400 focus:outline-none resize-none"
+          className="input-field"
+          style={{ resize: 'none' }}
           placeholder="Descreva sua dúvida..."
         />
       </div>
-      <div>
-        <label className="block text-xs font-medium text-gray-700 mb-1">Anexo (opcional, máx 5 MB)</label>
+      <div className="form-group">
+        <label className="form-label">Anexo (opcional, máx 5 MB)</label>
         <input
           type="file" onChange={e => setFile(e.target.files?.[0] ?? null)}
-          className="w-full text-xs text-gray-500 file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-indigo-50 file:text-indigo-700 file:font-medium hover:file:bg-indigo-100 cursor-pointer"
+          className="file-input"
         />
       </div>
-      {error && <p className="text-red-500 text-xs">{error}</p>}
-      <div className="flex gap-2 pt-1">
-        <button
-          type="submit" disabled={loading}
-          className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-2 rounded-lg text-sm font-medium transition-all disabled:opacity-50"
-        >
+      {error && <p className="error-text">{error}</p>}
+      <div className="footer-nav" style={{ paddingTop: '0.25rem' }}>
+        <button type="submit" disabled={loading} className="btn-submit">
           {loading ? 'Enviando...' : '📨 Enviar Dúvida'}
         </button>
-        <button
-          type="button" onClick={onCancel}
-          className="px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 text-gray-600 hover:bg-gray-50 transition-all"
-        >
+        <button type="button" onClick={onCancel} className="btn-secondary">
           Cancelar
         </button>
       </div>
@@ -113,22 +108,16 @@ function InquiryForm({ sessionId, onSent, onCancel }: { sessionId: string; onSen
 // ─── Satisfação ───────────────────────────────────────────────────────────────
 function SatisfactionPanel({ onRate }: { onRate: (flag: string) => void }) {
   return (
-    <div className="text-center space-y-3 py-2">
-      <p className="font-medium text-gray-700">O atendimento resolveu sua dúvida?</p>
-      <div className="flex justify-center gap-4">
-        <button
-          onClick={() => onRate('ATENDEU')}
-          className="flex flex-col items-center gap-1 p-4 rounded-xl border-2 border-green-200 hover:border-green-400 hover:bg-green-50 transition-all"
-        >
-          <span className="text-3xl">😊</span>
-          <span className="text-sm font-medium text-green-700">Sim, resolveu!</span>
+    <div className="satisfaction-container">
+      <p style={{ fontWeight: 500, color: '#374151' }}>O atendimento resolveu sua dúvida?</p>
+      <div className="satisfaction-options">
+        <button onClick={() => onRate('ATENDEU')} className="rate-button yes">
+          <span style={{ fontSize: '1.875rem' }}>😊</span>
+          <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#15803d' }}>Sim, resolveu!</span>
         </button>
-        <button
-          onClick={() => onRate('NAO_ATENDEU')}
-          className="flex flex-col items-center gap-1 p-4 rounded-xl border-2 border-red-200 hover:border-red-400 hover:bg-red-50 transition-all"
-        >
-          <span className="text-3xl">😕</span>
-          <span className="text-sm font-medium text-red-700">Não resolveu</span>
+        <button onClick={() => onRate('NAO_ATENDEU')} className="rate-button no">
+          <span style={{ fontSize: '1.875rem' }}>😕</span>
+          <span style={{ fontSize: '0.875rem', fontWeight: 500, color: '#b91c1c' }}>Não resolveu</span>
         </button>
       </div>
     </div>
@@ -172,7 +161,6 @@ const Chat = () => {
     }
     setLoading(false);
 
-    // Log da navegação
     try {
       await api.post('/logs', { sessionId, nodeId: parentId });
     } catch { /* silently fail */ }
@@ -190,7 +178,6 @@ const Chat = () => {
         setNodes(data.children);
         addBotMessage('Selecione uma opção:');
       } else {
-        // Nó folha — sem filhos
         setNodes([]);
         setHistory(prev => [...prev, { nodeId: node.id, title: node.title }]);
         setTimeout(() => setPhase('satisfaction'), 800);
@@ -238,81 +225,62 @@ const Chat = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl flex flex-col" style={{ height: '75vh' }}>
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-5 space-y-3">
+    <div className="chat-wrapper">
+      {/* Mensagens */}
+      <div className="messages-container">
         {messages.map((msg, idx) => (
-          <div key={idx} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+          <div key={idx} className={`message-row ${msg.type === 'user' ? 'user' : 'bot'}`}>
             {msg.type === 'bot' && (
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm mr-2 flex-shrink-0 mt-0.5">
-                🤖
-              </div>
+              <div className="bot-avatar">🤖</div>
             )}
-            <div
-              className={`max-w-xs md:max-w-md px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
-                msg.type === 'user'
-                  ? 'bg-gradient-to-br from-indigo-600 to-purple-700 text-white rounded-tr-sm'
-                  : 'bg-gray-100 text-gray-800 rounded-tl-sm'
-              }`}
-              style={{ whiteSpace: 'pre-wrap' }}
-            >
+            <div className={`message-bubble ${msg.type === 'user' ? 'user' : 'bot'}`}>
               {msg.text}
             </div>
           </div>
         ))}
         {loading && (
-          <div className="flex items-center gap-2 text-gray-400">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-sm">🤖</div>
-            <div className="bg-gray-100 px-4 py-2.5 rounded-2xl rounded-tl-sm flex gap-1">
-              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+          <div className="message-row bot" style={{ alignItems: 'center', gap: '0.5rem' }}>
+            <div className="bot-avatar">🤖</div>
+            <div className="loading-dots">
+              <span className="dot" style={{ animationDelay: '0ms' }} />
+              <span className="dot" style={{ animationDelay: '150ms' }} />
+              <span className="dot" style={{ animationDelay: '300ms' }} />
             </div>
           </div>
         )}
         <div ref={bottomRef} />
       </div>
 
-      {/* Actions panel */}
-      <div className="border-t border-gray-100 p-4 space-y-3">
+      {/* Painel de Ações */}
+      <div className="actions-panel">
         {phase === 'chat' && (
           <>
             {nodes.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="nodes-grid">
                 {nodes.map(node => (
                   <button
                     key={node.id}
                     onClick={() => selectNode(node)}
                     disabled={loading}
-                    className="text-left bg-gradient-to-r from-indigo-50 to-purple-50 hover:from-indigo-100 hover:to-purple-100 border border-indigo-200 hover:border-indigo-400 text-indigo-800 px-4 py-2.5 rounded-xl text-sm font-medium transition-all disabled:opacity-50"
+                    className="node-button"
                   >
                     {node.title}
                   </button>
                 ))}
               </div>
             )}
-            <div className="flex gap-2">
+            <div className="footer-nav">
               {history.length > 0 && (
-                <button
-                  onClick={goBack}
-                  disabled={loading}
-                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700 border border-gray-200 hover:border-gray-400 px-3 py-1.5 rounded-lg transition-all"
-                >
+                <button onClick={goBack} disabled={loading} className="btn-secondary">
                   ← Voltar
                 </button>
               )}
               {history.length > 0 && (
-                <button
-                  onClick={restart}
-                  className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 px-3 py-1.5 rounded-lg transition-all"
-                >
+                <button onClick={restart} className="btn-secondary" style={{ border: 'none' }}>
                   🏠 Início
                 </button>
               )}
-              <button
-                onClick={() => setPhase('inquiry')}
-                className="text-sm text-indigo-600 hover:text-indigo-800 px-3 py-1.5 rounded-lg transition-all ml-auto"
-              >
+              <button onClick={() => setPhase('inquiry')} className="btn-link">
                 ✉️ Enviar dúvida
               </button>
             </div>
@@ -321,11 +289,11 @@ const Chat = () => {
 
         {phase === 'satisfaction' && (
           <>
-            <div className="flex gap-2 mb-2">
-              <button onClick={restart} className="text-sm text-gray-400 hover:text-gray-600 px-3 py-1.5 rounded-lg">
+            <div className="footer-nav" style={{ marginBottom: '0.5rem' }}>
+              <button onClick={restart} className="btn-secondary" style={{ border: 'none' }}>
                 🏠 Início
               </button>
-              <button onClick={goBack} className="text-sm text-gray-400 hover:text-gray-600 px-3 py-1.5 rounded-lg">
+              <button onClick={goBack} className="btn-secondary" style={{ border: 'none' }}>
                 ← Voltar
               </button>
             </div>
@@ -345,11 +313,8 @@ const Chat = () => {
         )}
 
         {phase === 'done' && (
-          <div className="text-center py-2">
-            <button
-              onClick={restart}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all"
-            >
+          <div style={{ textAlign: 'center', padding: '0.5rem 0' }}>
+            <button onClick={restart} className="btn-submit" style={{ padding: '0.5rem 1.5rem', width: 'auto' }}>
               🏠 Novo atendimento
             </button>
           </div>
