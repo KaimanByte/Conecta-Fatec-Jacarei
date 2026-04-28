@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { toast } from 'sonner';
+import '../components/Login.css';
 
 const Login = ({ setToken }: { setToken?: (v: string | null) => void }) => {
   const [email, setEmail] = useState('');
@@ -22,44 +23,49 @@ const Login = ({ setToken }: { setToken?: (v: string | null) => void }) => {
   };
 
   // Auto login if token
-  if (localStorage.getItem('token')) {
-    navigate('/admin');
-    return null;
-  }
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      if (setToken) setToken(token);
+      navigate('/admin');
+    }
+  }, [navigate, setToken]);
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-8">
-      <h2 className="text-2xl font-bold text-center mb-6">Login Admin</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            placeholder="admin@fatec.edu"
-            required
-          />
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-avatar">
+          {/* Substituímos o SVG por uma imagem */}
+          <img src='/imagee.jpeg' alt="Avatar" />
         </div>
-        <div className="mb-6">
-          <label className="block text-sm font-medium mb-2">Senha</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            placeholder="admin"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-4 rounded-xl font-bold hover:from-blue-600 hover:to-indigo-700 shadow-lg shadow-blue-100 transition-all active:scale-95"
-        >
-          Entrar no Painel
-        </button>
-      </form>
+        <h2 className="login-title">LOGIN ADMIN</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>E-mail</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@fatec.edu"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Senha</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="admin"
+              required
+            />
+            <div className="forgot-password">ESQUECI A SENHA</div>
+          </div>
+          <button type="submit" className="login-button">
+            LOGIN
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
