@@ -33,7 +33,6 @@ body {
 /* ── HEADER ── */
 .app-header {
   background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
@@ -45,37 +44,42 @@ body {
 }
 
 .app-header__logo-sp img {
-    height: 48px;
+    height: 40px;
+    width: auto;
 }
 
 .app-header__logo-sp {
-    object-fit: contain;
-    background-color: black;
-    border-top-right-radius: 32px;
-    border-bottom-right-radius: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+  background-color: #000000;
+  padding: 20px 45px;
 
-.app-header__logo-sp {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background-color: black;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  gap: 12px;
+
+  display: flex;
+  align-items: center;
+  z-index: 10;
 }
 
 .app-header__logo-fatec {
   display: flex;
   align-items: center;
   gap: 16px;
-padding: 8px 8px 8px 8px;
-
+  padding-right: 20px;
 }
 
 .app-header__logo-fatec img {
-  height: 48px;
+  height: 72px;
   object-fit: contain;
+}
+
+#app-header__red-line {
+  background-color: #b20000;
+  height: 4px;
+  width: 100dvw;
+  position: absolute;
+  top: 76px;
+  z-index: 8;
 }
 
 .app-header__admin-badge {
@@ -103,110 +107,136 @@ padding: 8px 8px 8px 8px;
 }
 
 .app-footer__inner {
-  max-width: 1024px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 16px 20px;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: spa se-between;
-  gap: 12px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
 }
 
-/* Coluna de info */
-.app-footer__info {
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.app-footer__info-title {
+/* Colunas */
+.app-footer__info,
+.app-footer__contact,
+.app-footer__hours {
   font-size: 13px;
+  line-height: 1.4;
+}
+
+.app-footer__info-title,
+.app-footer__contact span,
+.app-footer__hours span {
+  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 4px;
-}
-
-/* Coluna de contato */
-.app-footer__contact {
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-.app-footer__contact span {
-  font-weight: 500;
-}
-
-/* Coluna de links + social */
-.app-footer__social {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  font-size: 12px;
-}
-
-.app-footer__conecta {
-  color: #ffffff;
-  font-weight: 600;
-  text-decoration: underline;
-  transition: color 0.2s;
-}
-
-.app-footer__conecta:hover {
-  color: #99f6e4;
-}
-
-.app-footer__social-icons {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.app-footer__social-icons a {
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  transition: color 0.2s;
-}
-
-.app-footer__social-icons a:hover {
-  color: #99f6e4;
-}
-
-.app-footer__social-icons svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* Link admin no rodapé */
-.app-footer__admin-link {
-  margin-top: 4px;
-  opacity: 0.6;
 }
 
 .app-footer__admin-link a {
   color: #ffffff;
   text-decoration: none;
   transition: color 0.2s;
-}
 
+}
+.app-footer__admin-link {
+  margin-top: 2px;
+  opacity: 0.6;
+}
 .app-footer__admin-link a:hover {
   color: #99f6e4;
 }
 
-.app-footer__admin-link a.bold {
-  font-weight: 600;
+
+/* Linha divisória */
+.Linha {
+  width: 1px;
+  height: 50px;
+  background-color: #ffffff30;
 }
 
-/* ── RESPONSIVO ── */
-@media (max-width: 640px) {
+/* Social */
+.app-footer__social {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.app-footer__social-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.app-footer__social-icons a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #00c4d8;
+  color: #005C6D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-footer__social-icons svg {
+  width: 20px;
+  height: 20px;
+}
+.app-footer__conecta {
+  color: #ffffff;
+  font-weight: 600;
+  transition: color 0.2s;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.app-footer__conecta:hover {
+  color: #99f6e4;
+}
+
+.app-footer__hours {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.app-footer__hours span {
+  font-weight: 700;
+}
+
+.app-footer__inner {
+  align-items: center;
+}
+.app-footer__contact p {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
   .app-footer__inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    gap: 22px;
+  }
+
+  .Linha {
+    display: none;
   }
 
   .app-footer__social {
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .app-footer__social-icons {
+    gap: 28px;
+  }
+
+  .app-footer__social-icons a {
+    width: 42px;
+    height: 42px;
+  }
+
+  .app-footer__social-icons svg {
+    width: 26px;
+    height: 26px;
   }
 }
