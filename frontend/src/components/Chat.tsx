@@ -57,25 +57,25 @@ function InquiryForm({ sessionId, onSent, onCancel }: { sessionId: string; onSen
 
   return (
     <form onSubmit={handleSubmit} className="inquiry-form">
-      <p className="form-title">Preencha para enviar sua dúvida à secretaria:</p>
-      <div className="form-group">
-        <label className="form-label">Nome completo *</label>
+      <p className="ask-form-title">Preencha para enviar sua dúvida à secretaria:</p>
+      <div className="ask-form-group">
+        <label className="ask-form-label">Nome completo *</label>
         <input
           required value={name} onChange={e => setName(e.target.value)}
           className="input-field"
           placeholder="Seu nome"
         />
       </div>
-      <div className="form-group">
-        <label className="form-label">E-mail *</label>
+      <div className="ask-form-group">
+        <label className="ask-form-label">E-mail *</label>
         <input
           required type="email" value={email} onChange={e => setEmail(e.target.value)}
           className="input-field"
           placeholder="seu@email.com"
         />
       </div>
-      <div className="form-group">
-        <label className="form-label">Dúvida *</label>
+      <div className="ask-form-group">
+        <label className="ask-form-label">Dúvida *</label>
         <textarea
           required value={question} onChange={e => setQuestion(e.target.value)}
           rows={3}
@@ -84,8 +84,8 @@ function InquiryForm({ sessionId, onSent, onCancel }: { sessionId: string; onSen
           placeholder="Descreva sua dúvida..."
         />
       </div>
-      <div className="form-group">
-        <label className="form-label">Anexo (opcional, máx 5 MB)</label>
+      <div className="ask-form-group">
+        <label className="ask-form-label">Anexo (opcional, máx 5 MB)</label>
         <input
           type="file" onChange={e => setFile(e.target.files?.[0] ?? null)}
           className="file-input"
@@ -94,7 +94,7 @@ function InquiryForm({ sessionId, onSent, onCancel }: { sessionId: string; onSen
       {error && <p className="error-text">{error}</p>}
       <div className="footer-nav" style={{ paddingTop: '0.25rem' }}>
         <button type="submit" disabled={loading} className="btn-submit">
-          {loading ? 'Enviando...' : '📨 Enviar Dúvida'}
+          {loading ? 'Enviando...' : 'Enviar Dúvida'}
         </button>
         <button type="button" onClick={onCancel} className="btn-secondary">
           Cancelar
@@ -151,7 +151,7 @@ const Chat = () => {
       const { data } = await api.get(url);
       setNodes(data);
       if (parentId === null) {
-        setMessages([{ type: 'bot', text: 'Olá! 👋 Bem-vindo ao autoatendimento acadêmico da **Fatec Jacareí**.\n\nEscolha uma opção abaixo:' }]);
+        setMessages([{ type: 'bot', text: 'Olá! 👋 Bem-vindo ao autoatendimento acadêmico da Fatec Jacareí.\n\nEscolha uma opção abaixo:' }]);
         setHistory([]);
       }
     } catch {
@@ -165,17 +165,22 @@ const Chat = () => {
     } catch { /* silently fail */ }
   };
 
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
   const selectNode = async (node: ChatNode) => {
     setMessages(prev => [...prev, { type: 'user', text: node.title }]);
     setLoading(true);
+    setNodes([]);
     try {
       const { data } = await api.get(`/chat/node/${node.id}`);
+      await sleep(1500);
       if (data.content) addBotMessage(data.content);
 
       if (data.children && data.children.length > 0) {
         setHistory(prev => [...prev, { nodeId: node.id, title: node.title }]);
-        setNodes(data.children);
         addBotMessage('Selecione uma opção:');
+        await sleep(500)
+        setNodes(data.children);
       } else {
         setNodes([]);
         setHistory(prev => [...prev, { nodeId: node.id, title: node.title }]);
@@ -230,7 +235,7 @@ const Chat = () => {
         {messages.map((msg, idx) => (
           <div key={idx} className={`message-row ${msg.type === 'user' ? 'user' : 'bot'}`}>
             {msg.type === 'bot' && (
-              <div className="bot-avatar">🤖</div>
+              <div className="bot-avatar"><img src="imagee.jpeg"></img></div>
             )}
             <div className={`message-bubble ${msg.type === 'user' ? 'user' : 'bot'}`}>
               {msg.text}
@@ -239,11 +244,11 @@ const Chat = () => {
         ))}
         {loading && (
           <div className="message-row bot" style={{ alignItems: 'center', gap: '0.5rem' }}>
-            <div className="bot-avatar">🤖</div>
+            <div className="bot-avatar"><img src="imagee.jpeg"></img></div>
             <div className="loading-dots">
               <span className="dot" style={{ animationDelay: '0ms' }} />
-              <span className="dot" style={{ animationDelay: '150ms' }} />
               <span className="dot" style={{ animationDelay: '300ms' }} />
+              <span className="dot" style={{ animationDelay: '600ms' }} />
             </div>
           </div>
         )}
@@ -276,11 +281,11 @@ const Chat = () => {
               )}
               {history.length > 0 && (
                 <button onClick={restart} className="btn-secondary" style={{ border: 'none' }}>
-                  🏠 Início
+                  Início
                 </button>
               )}
               <button onClick={() => setPhase('inquiry')} className="btn-link">
-                ✉️ Enviar dúvida
+                Enviar dúvida
               </button>
             </div>
           </>
@@ -290,7 +295,7 @@ const Chat = () => {
           <>
             <div className="footer-nav" style={{ marginBottom: '0.5rem' }}>
               <button onClick={restart} className="btn-secondary" style={{ border: 'none' }}>
-                🏠 Início
+                Início
               </button>
               <button onClick={goBack} className="btn-secondary" style={{ border: 'none' }}>
                 ← Voltar
@@ -314,7 +319,7 @@ const Chat = () => {
         {phase === 'done' && (
           <div style={{ textAlign: 'center', padding: '0.5rem 0' }}>
             <button onClick={restart} className="btn-submit" style={{ padding: '0.5rem 1.5rem', width: 'auto' }}>
-              🏠 Novo atendimento
+              Novo atendimento
             </button>
           </div>
         )}
