@@ -65,7 +65,7 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding-right: 20px;
+  padding-right: 28px;
 }
 
 .app-header__logo-fatec img {

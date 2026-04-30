@@ -3,12 +3,12 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #d1d1d1;
+  background: #FFFFFF;
 }
 
 .login-card {
   position: relative;
-  background: #0d5c63;
+  background: #D1D1D1;
   border-radius: 18px;
    width: 90%;
   max-width: 550px;
@@ -63,7 +63,7 @@
   margin-top: 80px;
   font-size: 1.2rem;
   font-weight: bold;
-  color: white;
+  color: black;
   margin-bottom: 1rem;
 }
 
@@ -78,7 +78,7 @@ form {
 }
 
 .form-group label {
-  color: white;
+  color: black ;
   font-size: 1rem;
   font-weight: bold;
 }
@@ -104,7 +104,7 @@ form {
 /* esqueceu senha */
 .forgot-password {
   font-size: 0.8rem;
-  color: white;
+  color: black;
   text-align: right;
   margin-top: 6px;
   margin-bottom:12px;

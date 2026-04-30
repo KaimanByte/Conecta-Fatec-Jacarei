@@ -2,6 +2,8 @@
 @import "./App.css";
 @import "./components/Chat.css";
 @import "./components/Login.css";
+@import "./components/AdminLayout.css";
+@import "./pages/AdminInquiries.css"; 
 
 /* 
    No Tailwind CSS v4, o suporte a variações 'dark:' baseadas em classe 
