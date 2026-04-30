@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { toast } from 'sonner';
-import '../components/Login.css';
 
 const Login = ({ setToken }: { setToken?: (v: string | null) => void }) => {
   const [email, setEmail] = useState('');
@@ -36,7 +35,7 @@ const Login = ({ setToken }: { setToken?: (v: string | null) => void }) => {
       <div className="login-card">
         <div className="login-avatar">
           {/* Substituímos o SVG por uma imagem */}
-          <img src='/imagee.jpeg' alt="Avatar" />
+          <img src='/fatec_jacarei.png' alt="Avatar" />
         </div>
         <h2 className="login-title">LOGIN ADMIN</h2>
         <form onSubmit={handleSubmit}>

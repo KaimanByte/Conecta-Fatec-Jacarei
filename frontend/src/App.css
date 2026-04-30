@@ -157,7 +157,7 @@ body {
 .app-footer__social {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
 }
 
 .app-footer__social-icons {

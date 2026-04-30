@@ -173,7 +173,7 @@ const Chat = () => {
     setNodes([]);
     try {
       const { data } = await api.get(`/chat/node/${node.id}`);
-      await sleep(1500);
+      await sleep(1150);
       if (data.content) addBotMessage(data.content);
 
       if (data.children && data.children.length > 0) {

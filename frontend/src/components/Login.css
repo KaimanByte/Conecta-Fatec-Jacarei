@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #f2f2f2;
+  background: #d1d1d1;
 }
 
 .login-card {
@@ -35,37 +35,36 @@
 
 .login-avatar {
   position: absolute;
-  top: 20px;
+  top: 8px;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 130px;   /* círculo maior para dar espaço */
-  height: 130px;
+  width: 148px;   /* círculo maior para dar espaço */
+  height: 148px;
   background: white;
   border-radius: 50%;
-  border: 6px solid #0d5c63;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   z-index: 3;
+  border: #B20000 1px solid; /* borda do círculo */
 }
 
 .login-avatar img {
-  width: 95%;             /* zoom controlado */
+  width: 86%;             /* zoom controlado */
   height: auto;
   object-fit: cover;       /* mantém proporção e preenche */
-  object-position: 50% 100%; /* 🔥 força a parte inferior (pescoço) a encostar na borda */
 }
 
 
 
 /* título */
 .login-title {
-  margin-top: 50px;
-  font-size: 1.6rem;
+  margin-top: 80px;
+  font-size: 1.2rem;
   font-weight: bold;
   color: white;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 form {
@@ -80,7 +79,7 @@ form {
 
 .form-group label {
   color: white;
-  font-size: clamp(1rem, 2vw, 1.4rem); /*  cresce em telas maiores */
+  font-size: 1rem;
   font-weight: bold;
 }
 
@@ -104,10 +103,10 @@ form {
 
 /* esqueceu senha */
 .forgot-password {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: white;
   text-align: right;
-  margin-top: 1px;
+  margin-top: 6px;
   margin-bottom:12px;
   cursor: pointer;
   display:block;
@@ -120,7 +119,7 @@ form {
   border: none;
   border-radius: 20px;
   padding: 0.2rem 0.1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
