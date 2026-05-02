@@ -1,0 +1,446 @@
+.admin-logs-header {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.admin-logs-title {
+  font-size: 1.5rem;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #111827;
+}
+
+.admin-logs-subtitle {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.admin-logs-filter {
+  display: flex;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+  padding: 0.25rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-logs-filter-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.admin-logs-filter-button:hover {
+  color: #4b5563;
+}
+
+.admin-logs-filter-button-active {
+  background-color: #4f46e5;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-logs-filter-button-active:hover {
+  color: white;
+}
+
+.admin-logs-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  transition: all 0.2s ease;
+}
+
+.admin-logs-stat-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+}
+
+.admin-logs-stat-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-logs-stat-icon {
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-logs-stat-icon-indigo {
+  background-color: #eef2ff;
+  color: #4f46e5;
+}
+
+.admin-logs-stat-icon-green {
+  background-color: #ecfdf5;
+  color: #16a34a;
+}
+
+.admin-logs-stat-icon-rose {
+  background-color: #fff1f2;
+  color: #e11d48;
+}
+
+.admin-logs-stat-icon-amber {
+  background-color: #fffbeb;
+  color: #d97706;
+}
+
+.admin-logs-stat-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+.admin-logs-stat-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #111827;
+}
+
+.admin-logs-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  transition: all 0.2s ease;
+}
+
+.admin-logs-chart-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+}
+
+.admin-logs-chart-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.admin-logs-chart-wrapper {
+  height: 16rem;
+}
+
+.admin-logs-table-card {
+  background-color: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+  overflow: hidden;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-logs-table-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #f9fafb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(249, 250, 251, 0.5);
+}
+
+.admin-logs-table-title {
+  font-weight: 700;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-logs-table-title-icon {
+  color: #6366f1;
+}
+
+.admin-logs-table-count {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.admin-logs-skeleton-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-logs-table-wrapper {
+  overflow-x: auto;
+}
+
+.admin-logs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-logs-table thead tr {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid #f9fafb;
+}
+
+.admin-logs-table th {
+  padding: 1rem 2rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.admin-logs-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.admin-logs-table tbody tr + tr {
+  border-top: 1px solid #f9fafb;
+}
+
+.admin-logs-table tbody tr:hover {
+  background-color: rgba(238, 242, 255, 0.2);
+}
+
+.admin-logs-center {
+  text-align: center !important;
+}
+
+.admin-logs-empty {
+  padding: 2.5rem 2rem;
+  text-align: center;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.admin-logs-session-cell {
+  padding: 1.25rem 2rem;
+}
+
+.admin-logs-session-id {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #374151;
+  display: block;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-logs-date {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.625rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.admin-logs-flow-cell {
+  padding: 1.25rem 2rem;
+}
+
+.admin-logs-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.admin-logs-flow-tag {
+  font-size: 0.625rem;
+  background-color: #f3f4f6;
+  color: #6b7280;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb;
+}
+
+.admin-logs-no-navigation {
+  color: #d1d5db;
+}
+
+.admin-logs-satisfaction-cell {
+  padding: 1.25rem 2rem;
+  text-align: center;
+}
+
+.admin-logs-satisfaction-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.admin-logs-satisfaction-positive {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.admin-logs-satisfaction-negative {
+  background-color: #ffe4e6;
+  color: #be123c;
+}
+
+.admin-logs-not-rated {
+  font-size: 0.625rem;
+  color: #d1d5db;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Responsivo */
+
+@media (min-width: 768px) {
+  .admin-logs-header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .admin-logs-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-logs-charts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Dark mode */
+
+.dark .admin-logs-title,
+.dark .admin-logs-stat-value,
+.dark .admin-logs-chart-title,
+.dark .admin-logs-table-title {
+  color: white;
+}
+
+.dark .admin-logs-subtitle {
+  color: #9ca3af;
+}
+
+.dark .admin-logs-filter,
+.dark .admin-logs-stat-card,
+.dark .admin-logs-chart-card,
+.dark .admin-logs-table-card {
+  background-color: #0f172a;
+  border-color: #1e293b;
+}
+
+.dark .admin-logs-filter-button {
+  color: #6b7280;
+}
+
+.dark .admin-logs-filter-button:hover {
+  color: #d1d5db;
+}
+
+.dark .admin-logs-filter-button-active {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.dark .admin-logs-stat-icon-indigo {
+  background-color: rgba(49, 46, 129, 0.3);
+  color: #818cf8;
+}
+
+.dark .admin-logs-stat-icon-green {
+  background-color: rgba(20, 83, 45, 0.3);
+  color: #4ade80;
+}
+
+.dark .admin-logs-stat-icon-rose {
+  background-color: rgba(136, 19, 55, 0.3);
+  color: #fb7185;
+}
+
+.dark .admin-logs-stat-icon-amber {
+  background-color: rgba(120, 53, 15, 0.3);
+  color: #fbbf24;
+}
+
+.dark .admin-logs-stat-label {
+  color: #6b7280;
+}
+
+.dark .admin-logs-table-header {
+  background-color: rgba(30, 41, 59, 0.5);
+  border-bottom-color: #1e293b;
+}
+
+.dark .admin-logs-table-count {
+  color: #9ca3af;
+}
+
+.dark .admin-logs-table thead tr {
+  background-color: rgba(15, 23, 42, 0.5);
+  border-bottom-color: #1e293b;
+}
+
+.dark .admin-logs-table th {
+  color: #6b7280;
+}
+
+.dark .admin-logs-table tbody tr + tr {
+  border-top-color: #1e293b;
+}
+
+.dark .admin-logs-table tbody tr:hover {
+  background-color: rgba(30, 41, 59, 0.3);
+}
+
+.dark .admin-logs-session-id {
+  color: #e5e7eb;
+}
+
+.dark .admin-logs-date {
+  color: #6b7280;
+}
+
+.dark .admin-logs-flow-tag {
+  background-color: #1e293b;
+  color: #9ca3af;
+  border-color: #334155;
+}
+
+.dark .admin-logs-satisfaction-positive {
+  background-color: rgba(5, 46, 22, 0.4);
+  color: #4ade80;
+}
+
+.dark .admin-logs-satisfaction-negative {
+  background-color: rgba(76, 5, 25, 0.4);
+  color: #fb7185;
+}
+
+.dark .admin-logs-not-rated {
+  color: #475569;
+}

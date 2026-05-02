@@ -15,7 +15,7 @@ const Login = ({ setToken }: { setToken?: (v: string | null) => void }) => {
       localStorage.setItem('token', data.token);
       if (setToken) setToken(data.token);
       toast.success('Bem-vindo ao Painel Admin!');
-      navigate('/admin');
+      navigate('/admin/inquiries');
     } catch (err: any) {
       toast.error(err.response?.data?.error || 'Erro no login. Verifique suas credenciais.');
     }
@@ -26,7 +26,7 @@ const Login = ({ setToken }: { setToken?: (v: string | null) => void }) => {
     const token = localStorage.getItem('token');
     if (token) {
       if (setToken) setToken(token);
-      navigate('/admin');
+      navigate('/admin/inquiries');
     }
   }, [navigate, setToken]);
 

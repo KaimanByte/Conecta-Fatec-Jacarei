@@ -84,7 +84,7 @@ const AdminInquiries = ({ setToken }: { setToken?: (v: string | null) => void })
       {/* Page Header */}
       <div className="inq-page-header">
         <div>
-          <h2 className="inq-page-title">Dúvidas da Secretaria</h2>
+          <h2 className="inq-page-title">Dúvidas</h2>
           <p className="inq-page-subtitle">Responda às solicitações enviadas pelos estudantes</p>
         </div>
 

@@ -47,12 +47,12 @@ function App() {
                     {/* Logo Fatec — direita */}
                     <div className="app-header__logo-fatec">
                       <img src="/fatec_jacarei.webp" alt="Fatec Jacareí" />
-                      {token && (
+                      {/* {token && (
                         <span className="app-header__admin-badge">
 
                           Modo Administrador
                         </span>
-                      )}
+                      )} */}
                     </div>
 
                   </div>
@@ -70,15 +70,15 @@ function App() {
                     {/* Coluna 1 — Endereço */}
                     <div className="app-footer__info">
                       <p className="app-footer__info-title">Fatec Jacareí</p>
-                      <p>Rua Padre Arlindo Vieira, 350 — Jardim São Martins</p>
-                      <p>CEP 12.327-020 · Jacareí / SP</p>
+                      <p>Av. Faria Lima, 155 - Jardim Santa Maria</p>
+                      <p>Jacareí/SP - CEP: 12328-070</p>
                     </div>
                     <div className='Linha'></div>
                     {/* Coluna 2 — Contato */}
                     {/* Telefone */}
                     <div className="app-footer__contact">
                       <p><span>Telefone:</span></p>
-                      <p>(12) 3959-7928</p>
+                      <p>(12) 3953-7926</p>
                     </div>
 
                     <div className='Linha'></div>
@@ -132,19 +132,21 @@ function App() {
                         </a>
 
                       </div>
-                      <div className='Linha'></div>
-                      {/* Link área admin */}
-                      <div className="app-footer__admin-link">
-                        {!token ? (
-                          <a href="/login">Área Admin</a>
-                        ) : (
-                          <a href="/admin" className="bold">Ir para o Painel</a>
-                        )}
-                      </div>
                     </div>
 
                   </div>
                 </footer>
+                <footer2>
+                  <img src="SP.webp"></img>
+                  {/* Link área admin */}
+                      <div className="app-footer__admin-link">
+                        {!token ? (
+                          <a href="/login">Área Admin</a>
+                        ) : (
+                          <a href="/admin/inquiries" className="bold">Ir para o Painel</a>
+                        )}
+                      </div>
+                </footer2>
 
               </div>
             }

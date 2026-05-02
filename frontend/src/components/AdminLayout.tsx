@@ -6,9 +6,10 @@ const AdminLayout = ({ children, setToken }: { children: ReactNode, setToken?: (
   const navigate = useNavigate();
   const location = useLocation();
   const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  });
+  return localStorage.getItem('theme') === 'dark';
+});
+
+const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
     if (darkMode) {
@@ -36,15 +37,17 @@ const AdminLayout = ({ children, setToken }: { children: ReactNode, setToken?: (
   return (
     <div className="admin-layout">
       {/* Sidebar */}
-      <aside className="admin-sidebar">
+      {/*INICIO*/}<aside className={`admin-sidebar ${!sidebarOpen ? 'admin-sidebar--hidden' : ''}`}>
         <div className="sidebar-header">
           <h2 className="sidebar-title">
-            <span className="sidebar-logo">🎓</span>
-            Painel Admin
+            <span className="sidebar-logo">
+              <img src="/fatec_jacarei.png"></img>
+            </span>
+            Secretária
           </h2>
         </div>
 
-        <nav className="sidebar-nav">
+        {/* <nav className="sidebar-nav">
           {menuItems.map((item) => (
             <Link
               key={item.path}
@@ -55,6 +58,13 @@ const AdminLayout = ({ children, setToken }: { children: ReactNode, setToken?: (
               <span className="nav-link-label">{item.name}</span>
             </Link>
           ))}
+        </nav> */}
+        <nav className="sidebar-nav">
+            <Link key='/admin/inquiries' to='/admin/inquiries' className={`nav-link ${location.pathname === '/admin/inquiries' ? 'nav-link--active' : ''}`}
+            >
+              {<MessageSquare size={20} />}
+              <span className="nav-link-label">Dúvidas</span>
+            </Link>
         </nav>
 
         <div className="sidebar-footer">
@@ -63,12 +73,23 @@ const AdminLayout = ({ children, setToken }: { children: ReactNode, setToken?: (
             <span className="nav-link-label">Sair</span>
           </button>
         </div>
-      </aside>
+      </aside> {/*FIM*/}
+
+      <button 
+            onClick={() => setSidebarOpen(!sidebarOpen)} 
+            className="sidebar-toggle-btn"
+          >
+            <ChevronRight 
+              size={20} 
+              className={!sidebarOpen ? '' : 'rotate'} 
+            />
+          </button>
 
       {/* Main Content */}
       <main className="admin-main">
         <header className="admin-header">
-          <h1 className="header-title">
+          
+          {/*<h1 className="header-title">
             {menuItems.find(i => i.path === location.pathname)?.name || 'Administração'}
           </h1>
           <div className="header-actions">
@@ -89,7 +110,7 @@ const AdminLayout = ({ children, setToken }: { children: ReactNode, setToken?: (
 
             <Link to="/" className="view-chatbot-link">Ver Chatbot</Link>
             <div className="avatar">A</div>
-          </div>
+          </div>*/}
         </header>
 
         <div className="admin-content">

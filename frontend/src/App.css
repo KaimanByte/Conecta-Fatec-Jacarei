@@ -102,18 +102,23 @@ body {
 
 /* ── FOOTER ── */
 .app-footer {
-  background-color: #005C6D;
   color: #ffffff;
+  min-height: 8rem;
 }
 
 .app-footer__inner {
   max-width: 1300px;
+  min-height: 8rem;
   margin: 0 auto;
   padding: 16px 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
+
+  color: #fff;
+  background: url("https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/1/2022/07/bg-footer-ed-azul-base.png") right center no-repeat fixed #004854;
 }
 
 /* Colunas */
@@ -138,8 +143,12 @@ body {
 
 }
 .app-footer__admin-link {
-  margin-top: 2px;
-  opacity: 0.6;
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top: 0;
+  opacity: 0.06;
 }
 .app-footer__admin-link a:hover {
   color: #99f6e4;
@@ -149,8 +158,9 @@ body {
 /* Linha divisória */
 .Linha {
   width: 1px;
-  height: 50px;
+  height: 40px;
   background-color: #ffffff30;
+  align-self: center;
 }
 
 /* Social */
@@ -207,6 +217,20 @@ body {
 }
 .app-footer__contact p {
   white-space: nowrap;
+}
+
+footer2 {
+  background-color: #000000;
+  height: 6.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+footer2 img {
+  height: 40px;
+  width: auto;
 }
 
 @media (max-width: 768px) {

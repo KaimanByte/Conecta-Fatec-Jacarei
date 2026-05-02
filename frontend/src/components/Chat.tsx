@@ -138,8 +138,11 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, phase]);
+  chatRef.current?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end'
+  });
+}, [messages, phase, nodes]);
 
   const addBotMessage = (text: string, html = false) =>
     setMessages(prev => [...prev, { type: 'bot', text, html }]);
@@ -228,8 +231,10 @@ const Chat = () => {
     }
   };
 
+  const chatRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="chat-wrapper">
+    <div className="chat-wrapper" ref={chatRef}>
       {/* Mensagens */}
       <div className="messages-container">
         {messages.map((msg, idx) => (
