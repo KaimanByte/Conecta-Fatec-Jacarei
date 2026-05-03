@@ -420,19 +420,19 @@
   gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #4f46e5; /* indigo-600 */
+  color: #b20000; /* indigo-600 */
 }
 
 :root.dark .inq-attachment-name {
-  color: #818cf8; /* indigo-400 */
+  color: #e75a5a; /* indigo-400 */
 }
 
 .inq-download-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #eef2ff; /* indigo-50 */
-  color: #3730a3;             /* indigo-700 */
+  background-color: #ffeeee; /* indigo-50 */
+  color: #b20000;             /* indigo-700 */
   padding: 0.375rem 0.75rem; /* px-3 py-1.5 */
   border-radius: 0.5rem;
   font-size: 0.75rem;
@@ -443,7 +443,7 @@
 }
 
 .inq-download-btn:hover {
-  background-color: #e0e7ff; /* indigo-100 */
+  background-color: #ffe0e0; /* indigo-100 */
 }
 
 :root.dark .inq-download-btn {

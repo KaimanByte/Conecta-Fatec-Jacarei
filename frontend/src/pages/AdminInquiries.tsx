@@ -69,7 +69,7 @@ const AdminInquiries = ({ setToken }: { setToken?: (v: string | null) => void })
     }
     try {
       await api.put(`/admin/inquiries/${id}`, { answerText });
-      toast.success('Dúvida respondida e aluno notificado por e-mail!');
+      toast.success('Dúvida respondida e resposta salva no sistema.');
       setAnswerText('');
       setExpandedId(null);
       fetchInquiries();

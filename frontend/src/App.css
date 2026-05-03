@@ -107,7 +107,6 @@ body {
 }
 
 .app-footer__inner {
-  max-width: 1300px;
   min-height: 8rem;
   margin: 0 auto;
   padding: 16px 20px;
@@ -233,6 +232,11 @@ footer2 img {
   width: auto;
 }
 
+@media (max-width: 1112px) {
+  .Linha {
+    display: none;
+  }
+}
 @media (max-width: 768px) {
   .app-footer__inner {
     flex-direction: column;

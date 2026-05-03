@@ -72,6 +72,15 @@
   border-top-left-radius: 0.125rem;
 }
 
+.message-bubble.bot a {
+  color: white;
+  font-weight: 700;
+}
+
+.message-bubble.bot a:hover {
+  color: rgb(190, 236, 250);
+}
+
 /* Loading Dots Animation */
 .loading-dots {
   display: flex;

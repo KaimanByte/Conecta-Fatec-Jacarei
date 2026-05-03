@@ -177,7 +177,7 @@ const Chat = () => {
     try {
       const { data } = await api.get(`/chat/node/${node.id}`);
       await sleep(1150);
-      if (data.content) addBotMessage(data.content);
+      if (data.content) addBotMessage(data.content, true);
 
       if (data.children && data.children.length > 0) {
         setHistory(prev => [...prev, { nodeId: node.id, title: node.title }]);
@@ -243,7 +243,11 @@ const Chat = () => {
               <div className="bot-avatar"><img src="imagee.jpeg"></img></div>
             )}
             <div className={`message-bubble ${msg.type === 'user' ? 'user' : 'bot'}`}>
-              {msg.text}
+              {msg.html ? (
+                <div dangerouslySetInnerHTML={{ __html: msg.text }} />
+              ) : (
+                msg.text
+              )}
             </div>
           </div>
         ))}
