@@ -1,0 +1,346 @@
+/* =============================================
+   AdminLayout.css
+   Equivalente CSS do AdminLayout com Tailwind
+   ============================================= */
+
+/* ---------- Layout raiz ---------- */
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #f9fafb;
+  transition: background-color 0.3s, color 0.3s;
+  overflow: hidden;
+}
+
+:root.dark .admin-layout {
+  background-color: #020617; /* slate-950 */
+}
+
+/* ---------- Sidebar ---------- */
+.admin-sidebar {
+  width: 16rem;
+  height: 100vh;
+  position: relative;
+  top: 0;
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-right: solid 1px #b20000;
+  transition: width 0.3s ease;
+}
+
+.admin-sidebar--hidden {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+}
+
+:root.dark .admin-sidebar {
+  background-color: #0f172a; /* slate-900 */
+}
+
+/* Sidebar header */
+.sidebar-header {
+  padding: 0.965rem; /* p-6 */
+  /*border-bottom: 1px solid #000000;*/ /* indigo-800 */
+  background: #b20000;
+  color: #ffffff;
+}
+
+:root.dark .sidebar-header {
+  border-bottom-color: #1e293b; /* slate-800 */
+}
+
+.sidebar-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700;   /* font-bold */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.sidebar-logo {
+  background-color: #ffffff;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem; /* rounded-lg */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar-logo img {
+  width: 1.8rem;
+}
+
+/* Sidebar nav */
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem; /* p-4 */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* space-y-2 */
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* gap-3 */
+  padding: 0.75rem 1rem; /* px-4 py-3 */
+  border-radius: 0.75rem; /* rounded-xl */
+  text-decoration: none;
+  color: #000000; /* indigo-200 */
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: #b20000; /* indigo-800 */
+  color: #ffffff;
+}
+
+:root.dark .nav-link:hover {
+  background-color: #1e293b; /* slate-800 */
+}
+
+.nav-link--active {
+  background-color: #b20000; /* indigo-700 */
+  color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); /* shadow-md */
+}
+
+:root.dark .nav-link--active {
+  background-color: #b20000; /* indigo-600 */
+}
+
+.nav-link-label {
+  font-weight: 500; /* font-medium */
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+  padding: 1rem; /* p-4 */
+  border-top: 1px solid #b20000; /* indigo-800 */
+}
+
+:root.dark .sidebar-footer {
+  border-top-color: #1e293b; /* slate-800 */
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000; /* indigo-300 */
+  border-radius: 0.75rem;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 1rem;
+}
+
+.logout-btn:hover {
+  background-color: #b20000; /* indigo-800 */
+  color: #ffffff;
+}
+
+:root.dark .logout-btn:hover {
+  background-color: #1e293b; /* slate-800 */
+}
+
+/* ---------- Main ---------- */
+.admin-main {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Header */
+.admin-header {
+  height: 3.93rem;
+
+  background-color: #b20000;
+  border-bottom: 1px solid #b20000; /* gray-200 */
+  padding: 1rem 2rem; /* px-8 py-4 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+:root.dark .admin-header {
+  background-color: #0f172a; /* slate-900 */
+  border-bottom-color: #1e293b; /* slate-800 */
+}
+
+.sidebar-toggle-btn {
+  position: fixed;
+  top: 50%;
+  left: 16rem;
+  transform: translate(-50%, -50%);
+
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  padding: 0.45rem;
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  transition: left 0.3s ease, transform 0.2s ease, background-color 0.2s, color 0.2s;
+  z-index: 30;
+}
+
+.admin-sidebar--hidden + .sidebar-toggle-btn {
+  left: -2rem;
+  transform: translate(50%, -50%);
+}
+
+.sidebar-toggle-btn:hover {
+  background-color: #b20000;
+  color: #ffffff;
+  transform: translate(calc(-50% + 10px), -50%);
+}
+
+.admin-sidebar--hidden + .sidebar-toggle-btn:hover {
+  transform: translate(calc(40% + 6px), -50%);
+}
+
+/* animação do ícone */
+.sidebar-toggle-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.sidebar-toggle-btn .rotate {
+  transform: rotate(180deg);
+}
+
+/* dark mode */
+:root.dark .sidebar-toggle-btn {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+:root.dark .sidebar-toggle-btn:hover {
+  background-color: #b20000;
+}
+
+.header-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600;   /* font-semibold */
+  color: #ffffff;     /* gray-800 */
+  margin: 0;
+  transition: color 0.3s;
+}
+
+:root.dark .header-title {
+  color: #ffffff;
+}
+
+/* Header actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* gap-6 */
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  background-color: #f3f4f6; /* gray-100 */
+  padding: 0.25rem; /* p-1 */
+  border-radius: 9999px; /* rounded-full */
+  transition: background-color 0.3s;
+}
+
+:root.dark .theme-toggle {
+  background-color: #1e293b; /* slate-800 */
+}
+
+.theme-btn {
+  padding: 0.375rem; /* p-1.5 */
+  border-radius: 9999px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #9ca3af; /* gray-400 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.theme-btn:hover {
+  color: #4b5563; /* gray-600 */
+}
+
+/* Light mode active (Sun) */
+.theme-btn--active-light {
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* shadow-sm */
+  color: #f59e0b; /* amber-500 */
+}
+
+/* Dark mode active (Moon) */
+.theme-btn--active-dark {
+  background-color: #334155; /* slate-700 */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  color: #818cf8; /* indigo-400 */
+}
+
+/* View chatbot link */
+.view-chatbot-link {
+  font-size: 0.875rem; /* text-sm */
+  color: #4f46e5;      /* indigo-600 */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.view-chatbot-link:hover {
+  text-decoration: underline;
+}
+
+:root.dark .view-chatbot-link {
+  color: #818cf8; /* indigo-400 */
+}
+
+/* Avatar */
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background-color: #e0e7ff; /* indigo-100 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3730a3;   /* indigo-700 */
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+:root.dark .avatar {
+  background-color: #1e293b; /* slate-800 */
+  color: #818cf8;            /* indigo-400 */
+}
+
+/* ---------- Content area ---------- */
+.admin-content {
+  padding: 2rem; /* p-8 */
+}
