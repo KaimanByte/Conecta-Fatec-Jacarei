@@ -1,0 +1,270 @@
+/* ─────────────────────────────────────────
+   App.css — Fatec Jacareí Autoatendimento
+   ───────────────────────────────────────── */
+
+/* RESET / BASE */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f3f4f6;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+/* ── LAYOUT RAIZ ── */
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f4f6;
+}
+
+.page-public {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.app-header {
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.app-header__inner {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header__logo-sp img {
+    height: 40px;
+    width: auto;
+}
+
+.app-header__logo-sp {
+  background-color: #000000;
+  padding: 20px 45px;
+
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  gap: 12px;
+
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.app-header__logo-fatec {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 28px;
+}
+
+.app-header__logo-fatec img {
+  height: 72px;
+  object-fit: contain;
+}
+
+#app-header__red-line {
+  background-color: #b20000;
+  height: 4px;
+  width: 100dvw;
+  position: absolute;
+  top: 76px;
+  z-index: 8;
+}
+
+.app-header__admin-badge {
+  font-size: 12px;
+  color: #6b7280;
+  background-color: #f3f4f6;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-style: italic;
+}
+
+/* ── MAIN / CHAT ── */
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* ── FOOTER ── */
+.app-footer {
+  color: #ffffff;
+  min-height: 8rem;
+}
+
+.app-footer__inner {
+  min-height: 8rem;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
+
+  color: #fff;
+  background: url("https://bkpsitecpsnew.blob.core.windows.net/uploadsitecps/sites/1/2022/07/bg-footer-ed-azul-base.png") right center no-repeat fixed #004854;
+}
+
+/* Colunas */
+.app-footer__info,
+.app-footer__contact,
+.app-footer__hours {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.app-footer__info-title,
+.app-footer__contact span,
+.app-footer__hours span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.app-footer__admin-link a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s;
+
+}
+.app-footer__admin-link {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top: 0;
+  opacity: 0.06;
+}
+.app-footer__admin-link a:hover {
+  color: #99f6e4;
+}
+
+
+/* Linha divisória */
+.Linha {
+  width: 1px;
+  height: 40px;
+  background-color: #ffffff30;
+  align-self: center;
+}
+
+/* Social */
+.app-footer__social {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.app-footer__social-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.app-footer__social-icons a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #00c4d8;
+  color: #005C6D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-footer__social-icons svg {
+  width: 20px;
+  height: 20px;
+}
+.app-footer__conecta {
+  color: #ffffff;
+  font-weight: 600;
+  transition: color 0.2s;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.app-footer__conecta:hover {
+  color: #99f6e4;
+}
+
+.app-footer__hours {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.app-footer__hours span {
+  font-weight: 700;
+}
+
+.app-footer__inner {
+  align-items: center;
+}
+.app-footer__contact p {
+  white-space: nowrap;
+}
+
+footer2 {
+  background-color: #000000;
+  height: 6.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+footer2 img {
+  height: 40px;
+  width: auto;
+}
+
+@media (max-width: 1112px) {
+  .Linha {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .app-footer__inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 22px;
+  }
+
+  .Linha {
+    display: none;
+  }
+
+  .app-footer__social {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .app-footer__social-icons {
+    gap: 28px;
+  }
+
+  .app-footer__social-icons a {
+    width: 42px;
+    height: 42px;
+  }
+
+  .app-footer__social-icons svg {
+    width: 26px;
+    height: 26px;
+  }
+}
