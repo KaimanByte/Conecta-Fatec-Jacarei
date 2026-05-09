@@ -8,6 +8,9 @@
 
 > Objetivo: aluno navega pelo chatbot, envia pergunta quando não acha o que quer e avalia o atendimento. Secretária consegue fazer login e visualizar e gerenciar as perguntas recebidas.
 
+**Total Sprint 1: 51 pts**
+
+
 | ID | Atividade | Pontos | Área | Requisito |
 |----|-----------|:------:|------|-----------|
 | T01 | Fazer o wireframe da tela inicial do chatbot (lista de opções principais) | 2 | Design | RF01 |
@@ -37,13 +40,15 @@
 | T44 | Criar o botão para a secretária atualizar o status de uma pergunta | 2 | Frontend | RF06 |
 | T50 | Desenhar o diagrama de casos de uso | 3 | UML | RNF04 |
 
-**Total Sprint 1: 49 pts**
 
 ---
 
 ## Sprint 2 — Painel do administrador + autenticação + responsividade + protótipo Figma
 
-> Objetivo: autenticação real funcionando, administrador consegue gerenciar nós e usuários, sistema funciona bem no celular e protótipo navegável do Figma entregue.
+> Objetivo: autenticação real funcionando, administrador consegue gerenciar nós e usuários e sistema funciona bem no celular.
+
+**Total Sprint 2: 48 pts**
+
 
 | ID | Atividade | Pontos | Área | Requisito |
 |----|-----------|:------:|------|-----------|
@@ -67,13 +72,15 @@
 | T49 | Garantir que todas as telas funcionem bem no celular (responsividade) | 3 | Frontend | RNF01 |
 | T51 | Desenhar o diagrama de classes | 3 | UML | RNF04 |
 
-**Total Sprint 2: 48 pts**
 
 ---
 
 ## Sprint 3 — Documentos + chunks + UML + documentação final
 
 > Objetivo: funcionalidade de busca em documentos entregue, autenticação totalmente finalizada, diagramas restantes e toda a documentação técnica prontos para apresentação.
+
+**Total Sprint 3: 37 pts**
+s
 
 | ID | Atividade | Pontos | Área | Requisito |
 |----|-----------|:------:|------|-----------|
@@ -93,7 +100,6 @@
 | T59 | Escrever os READMEs das pastas backend e frontend com instruções de execução | 2 | Docs | RNF07 |
 | T60 | Documentar os testes unitários realizados no projeto | 3 | Docs | — |
 
-**Total Sprint 3: 37 pts**
 
 ---
 
@@ -101,7 +107,7 @@
 
 | Sprint | Foco | Tasks | Pontos |
 |--------|------|:-----:|:------:|
-| Sprint 1 | MVP — chatbot + painel da secretária + login | 26 | 49 |
+| Sprint 1 | MVP — chatbot + painel da secretária + login | 26 | 51 |
 | Sprint 2 | Painel admin + autenticação + responsividade | 19 | 48 |
 | Sprint 3 | Documentos/chunks + auth finalizada + UML + docs | 15 | 37 |
-| **Total** | | **60** | **134** |
+| **Total** | | **60** | **136** |
