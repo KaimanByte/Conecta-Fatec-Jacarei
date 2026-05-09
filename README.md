@@ -9,7 +9,7 @@
 <p align="center">
   <a href="#descrição-do-projeto">Sobre o Projeto</a> |
   <a href="#entregas-de-sprints">Entrega de Sprints</a> |
-  <a href="#recursos-do-produto">Recursos do Produto</a> |
+  <a href="#recursos-do-produto">Engenharia de Software</a> |
   <a href="#equipe">Nossa Equipe</a>
 </p>
 
@@ -30,8 +30,8 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 
 | Sprint | Entrega       | Status |                 Relatório                  |                Apresentação                |
 |------: |---------------|:------:|:------------------------------------------:|:------------------------------------------:|
-| 1      | 📅 04/05/2026 | 🚧     | Em definição | - |
-| 2      | 📅 Em definição | `—`     | - | - |
+| 1      | 📅 04/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint1) | - |
+| 2      | 📅 Em definição | 🚧     | - | - |
 | 3      | 📅 Em definição | `—`     | - | - |
 
 </div>
@@ -43,10 +43,12 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 
 ## Recursos do Produto 
 
-- **Requisitos do Produto com DoD e DoR:** [Acesse aqui](./arquivos/produto/requisitos.md)
+- **Backlog do Produto com DoD e DoR:** [Acesse aqui](./arquivos/produto/BacklogProduto.md)
 Detalhamento completo dos requisitos funcionais e não funcionais do projeto, incluindo User Stories, critérios de entrada (DoR) e critérios de conclusão (DoD) de cada requisito.
-- **Backlog de Tasks:** [Acesse aqui](./arquivos/produto/backlog.md)
+- **Backlog das Sprints:** [Acesse aqui](./arquivos/produto/sprints/BacklogSprints.md)
 Lista completa de tasks do projeto, com identificador, descrição da atividade, pontuação em Fibonacci e rastreabilidade com os requisitos atendidos.
+- **Diagrama de Casos de Uso:** [Acesse aqui](./arquivos/produto/diagramas/CasoUso.png)  
+Representação visual das interações entre os atores do sistema e as principais funcionalidades da aplicação.
 
 
 ## Stack
