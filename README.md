@@ -30,7 +30,7 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 
 | Sprint | Entrega       | Status |                 Relatório                  |                Apresentação                |
 |------: |---------------|:------:|:------------------------------------------:|:------------------------------------------:|
-| 1      | 📅 04/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint1) | - |
+| 1      | 📅 04/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint1.md) | - |
 | 2      | 📅 Em definição | 🚧     | - | - |
 | 3      | 📅 Em definição | `—`     | - | - |
 
