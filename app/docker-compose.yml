@@ -2,15 +2,15 @@ services:
   postgres:
     image: postgres:16
     environment:
-      POSTGRES_DB: chatbot_academico
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${DB_NAME:?DB_NAME não configurado}
+      POSTGRES_USER: ${DB_USER:?DB_USER não configurado}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD não configurado}
     ports:
       - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d chatbot_academico"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:?DB_USER não configurado} -d ${DB_NAME:?DB_NAME não configurado}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -18,8 +18,8 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@fatec.edu
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:?PGADMIN_DEFAULT_EMAIL não configurado}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:?PGADMIN_DEFAULT_PASSWORD não configurado}
     ports:
       - "5433:80"
     depends_on:
@@ -47,4 +47,3 @@ services:
 
 volumes:
   postgres_data:
-
