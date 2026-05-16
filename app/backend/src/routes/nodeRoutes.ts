@@ -1,8 +1,14 @@
-import { Router, Request, Response } from 'express';
-import { Node } from '../models/index.js';
+import { Router } from 'express';
 import { auth, rbac } from '../middleware/auth.js';
-import { Op } from 'sequelize';
 import { validate, nodeSchema } from '../middleware/validate.js';
+import {
+  createNode,
+  deleteNode,
+  getChatNode,
+  listAdminNodes,
+  listChatNodes,
+  updateNode,
+} from '../controllers/nodeController.js';
 
 const router = Router();
 
@@ -30,24 +36,7 @@ const router = Router();
  *       200:
  *         description: Lista de nós filhos
  */
-router.get('/chat/nodes/:id?', async (req: Request, res: Response) => {
-  try {
-    const paramId = req.params.id;
-    if (paramId && isNaN(Number(paramId))) {
-      res.status(400).json({ error: 'ID inválido' });
-      return;
-    }
-    const id = paramId ? Number(paramId) : null;
-    const nodes = await Node.findAll({
-      where: id ? { parentId: id } : { parentId: null },
-      attributes: ['id', 'title', 'content'],
-    });
-    res.json(nodes);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
+router.get('/chat/nodes/:id?', listChatNodes);
 
 /**
  * @openapi
@@ -64,27 +53,7 @@ router.get('/chat/nodes/:id?', async (req: Request, res: Response) => {
  *       200:
  *         description: Nó detalhado
  */
-router.get('/chat/node/:id', async (req: Request, res: Response) => {
-  try {
-    const paramId = req.params.id;
-    if (isNaN(Number(paramId))) {
-      res.status(400).json({ error: 'ID inválido' });
-      return;
-    }
-    const node = await Node.findOne({
-      where: { id: Number(paramId) },
-      include: [{ model: Node, as: 'children' }],
-    });
-    if (!node) {
-      res.status(404).json({ error: 'Nó não encontrado' });
-      return;
-    }
-    res.json(node);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
+router.get('/chat/node/:id', getChatNode);
 
 // ─── Admin Routes ─────────────────────────────────────────────────────────────
 
@@ -105,24 +74,7 @@ router.get('/chat/node/:id', async (req: Request, res: Response) => {
  *       200:
  *         description: Lista total de nós
  */
-router.get('/admin/nodes', auth, rbac(['admin', 'secretary']), async (req: Request, res: Response) => {
-  try {
-    const { search } = req.query;
-    const where: any = {};
-    if (search) {
-      where.title = { [Op.iLike]: `%${search}%` };
-    }
-    const nodes = await Node.findAll({
-      where,
-      attributes: ['id', 'title', 'content', 'parentId'],
-      order: [['id', 'ASC']],
-    });
-    res.json(nodes);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
+router.get('/admin/nodes', auth, rbac(['admin', 'secretary']), listAdminNodes);
 
 /**
  * @openapi
@@ -147,16 +99,7 @@ router.get('/admin/nodes', auth, rbac(['admin', 'secretary']), async (req: Reque
  *       201:
  *         description: Nó criado com sucesso
  */
-router.post('/admin/nodes', auth, rbac(['admin', 'secretary']), validate(nodeSchema), async (req: Request, res: Response) => {
-  try {
-    const { title, content, parentId } = req.body;
-    const node = await Node.create({ title, content, parentId: parentId || null } as any);
-    res.status(201).json(node);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
+router.post('/admin/nodes', auth, rbac(['admin', 'secretary']), validate(nodeSchema), createNode);
 
 /**
  * @openapi
@@ -185,23 +128,7 @@ router.post('/admin/nodes', auth, rbac(['admin', 'secretary']), validate(nodeSch
  *       200:
  *         description: Nó atualizado
  */
-router.put('/admin/nodes/:id', auth, rbac(['admin', 'secretary']), validate(nodeSchema), async (req: Request, res: Response) => {
-  try {
-    const { title, content, parentId } = req.body;
-    const [count] = await Node.update(
-      { title, content, parentId: parentId ?? null },
-      { where: { id: Number(req.params.id) } }
-    );
-    if (count === 0) {
-      res.status(404).json({ error: 'Nó não encontrado' });
-      return;
-    }
-    res.json({ message: 'Nó atualizado' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
+router.put('/admin/nodes/:id', auth, rbac(['admin', 'secretary']), validate(nodeSchema), updateNode);
 
 /**
  * @openapi
@@ -220,18 +147,6 @@ router.put('/admin/nodes/:id', auth, rbac(['admin', 'secretary']), validate(node
  *       200:
  *         description: Nó excluído
  */
-router.delete('/admin/nodes/:id', auth, rbac(['admin', 'secretary']), async (req: Request, res: Response) => {
-  try {
-    const count = await Node.destroy({ where: { id: Number(req.params.id) } });
-    if (count === 0) {
-      res.status(404).json({ error: 'Nó não encontrado' });
-      return;
-    }
-    res.json({ message: 'Nó excluído' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
+router.delete('/admin/nodes/:id', auth, rbac(['admin', 'secretary']), deleteNode);
 
 export default router;
