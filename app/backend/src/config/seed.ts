@@ -482,6 +482,21 @@ async function createAdminUser() {
   }
 }
 
+async function createSecretaryUser() {
+  const secretaryEmail = 'secretaria@fatec.edu';
+  const existingSecretary = await User.findOne({ where: { email: secretaryEmail } });
+
+  if (!existingSecretary) {
+    await User.create({
+      email: secretaryEmail,
+      password: 'secretaria123',
+      role: 'secretary',
+    } as any);
+
+    console.log('✅ Usuário secretaria criado com sucesso.');
+  }
+}
+
 async function createChatTree() {
   const count = await ChatNode.count();
 
@@ -524,6 +539,7 @@ export async function seedDatabase() {
 
   try {
     await createAdminUser();
+    await createSecretaryUser();
     await createChatTree();
     console.log('✨ Seed finalizado com sucesso!');
   } catch (error) {

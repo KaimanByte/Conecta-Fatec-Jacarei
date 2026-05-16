@@ -119,7 +119,7 @@ router.post('/logs/:sessionId/satisfaction', async (req: Request, res: Response)
  *       200:
  *         description: Lista de logs
  */
-router.get('/admin/logs', auth, rbac(['admin', 'secretary']), async (req: Request, res: Response) => {
+router.get('/admin/logs', auth, rbac(['admin']), async (req: Request, res: Response) => {
   try {
     const { satisfaction } = req.query;
     const where: any = {};

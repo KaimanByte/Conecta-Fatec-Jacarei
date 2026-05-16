@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/index.js';
 import { validate, loginSchema } from '../middleware/validate.js';
+import { auth, rbac } from '../middleware/auth.js';
 
 const router = Router();
 
@@ -40,6 +41,7 @@ router.post('/login', validate(loginSchema), async (req: Request, res: Response)
     const { email, password } = req.body;
     
     const user = await User.findOne({ where: { email } });
+
     if (!user) {
       res.status(401).json({ error: 'Credenciais inválidas' });
       return;
@@ -54,6 +56,7 @@ router.post('/login', validate(loginSchema), async (req: Request, res: Response)
     }
     
     const secret = process.env.JWT_SECRET;
+
     if (!secret) {
       res.status(500).json({ error: 'JWT_SECRET não configurado' });
       return;
@@ -64,11 +67,37 @@ router.post('/login', validate(loginSchema), async (req: Request, res: Response)
       secret,
       { expiresIn: '8h' }
     );
+
     res.json({ token, role: (user as any).role });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
+
+/**
+ * Valida se o token pertence a um administrador.
+ * Se não tiver token: 401.
+ * Se o token for inválido/expirado: 401.
+ * Se o usuário não for admin: 403.
+ */
+router.get('/validate-admin', auth, rbac(['admin']), (req: Request, res: Response) => {
+  res.json({ valid: true });
+});
+
+/**
+ * Valida se o token pertence a uma secretária ou administrador.
+ * Se não tiver token: 401.
+ * Se o token for inválido/expirado: 401.
+ * Se o usuário não for secretary/admin: 403.
+ */
+router.get(
+  '/validate-secretary',
+  auth,
+  rbac(['secretary', 'admin']),
+  (req: Request, res: Response) => {
+    res.json({ valid: true });
+  }
+);
 
 export default router;
