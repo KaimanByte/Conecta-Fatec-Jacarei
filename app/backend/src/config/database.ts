@@ -3,13 +3,26 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const requiredEnv = (name: string): string => {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Variável de ambiente obrigatória não configurada: ${name}`);
+  }
+  return value;
+};
+
+const dbPort = Number(requiredEnv('DB_PORT'));
+if (Number.isNaN(dbPort)) {
+  throw new Error('Variável de ambiente DB_PORT deve ser um número válido');
+}
+
 const sequelize = new Sequelize(
-  process.env.DB_NAME || 'chatbot_academico',
-  process.env.DB_USER || 'postgres',
-  process.env.DB_PASSWORD || 'postgres',
+  requiredEnv('DB_NAME'),
+  requiredEnv('DB_USER'),
+  requiredEnv('DB_PASSWORD'),
   {
-    host: process.env.DB_HOST || 'postgres',
-    port: parseInt(process.env.DB_PORT || '5432'),
+    host: requiredEnv('DB_HOST'),
+    port: dbPort,
     dialect: 'postgres',
     logging: false,
   }
@@ -30,4 +43,3 @@ export async function connectWithRetry(maxRetries = 10, delay = 3000) {
 }
 
 export default sequelize;
-

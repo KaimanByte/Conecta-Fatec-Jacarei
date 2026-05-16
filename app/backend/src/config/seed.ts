@@ -478,7 +478,7 @@ async function createAdminUser() {
       role: 'admin',
     } as any);
 
-    console.log('✅ Usuário admin criado: admin@fatec.edu / admin123');
+    console.log('✅ Usuário admin criado com sucesso.');
   }
 }
 

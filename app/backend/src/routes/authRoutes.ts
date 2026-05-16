@@ -53,7 +53,12 @@ router.post('/login', validate(loginSchema), async (req: Request, res: Response)
       return;
     }
     
-    const secret = process.env.JWT_SECRET || 'secret';
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      res.status(500).json({ error: 'JWT_SECRET não configurado' });
+      return;
+    }
+
     const token = jwt.sign(
       { id: (user as any).id, role: (user as any).role },
       secret,

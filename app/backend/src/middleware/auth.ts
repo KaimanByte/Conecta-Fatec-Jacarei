@@ -22,9 +22,11 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
 
   const token = authHeader.slice(7); // Remove 'Bearer '
 
-  const secret = process.env.JWT_SECRET || 'secret';
-  // Note: Local tests might not have JWT_SECRET in env, so we fallback for safety
-  
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    return res.status(500).json({ error: 'JWT_SECRET não configurado' });
+  }
+
   try {
     const decoded = jwt.verify(token, secret) as JWT_Payload;
     req.user = decoded;
