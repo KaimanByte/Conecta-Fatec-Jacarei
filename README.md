@@ -72,9 +72,11 @@ Representação visual das interações entre os atores do sistema e as principa
 
 ## Estrutura
 
-- `backend/`: API HTTP com autenticação JWT, RBAC e módulos de negócio
-- `frontend/`: Interface React para navegação do autoatendimento
-- `database/`: DDL/DML (schema e seed)
+- `app/docker-compose.yml`: arquivo de orquestração dos containers da aplicação
+- `app/.env`: variáveis utilizadas pelo backend ao executar via Docker Compose
+- `app/backend/`: API HTTP com autenticação JWT, RBAC e módulos de negócio
+- `app/backend/src/config/seed.ts`: carga inicial de dados da aplicação
+- `app/frontend/`: interface React para navegação do autoatendimento
 
 ## Como subir a aplicação com Docker Compose
 
@@ -84,43 +86,60 @@ Pré-requisitos:
 
 Passo a passo:
 
-1. Confira ou ajuste as variáveis no arquivo `.env` na raiz do repositório.
-2. Suba todos os containers:
+1. Acesse a pasta `app`, onde está localizado o arquivo `docker-compose.yml`:
+   ```bash
+   cd app
+   ```
+2. Confira ou ajuste as variáveis no arquivo `.env` dessa pasta, principalmente as configurações de banco, porta do backend e URL do frontend.
+3. Suba todos os containers:
    ```bash
    docker compose up --build -d
    ```
-3. Verifique se os serviços estão em execução:
+4. Verifique se os serviços estão em execução:
    ```bash
    docker compose ps
    ```
-4. Para acompanhar logs:
+5. Para acompanhar logs:
    ```bash
    docker compose logs -f
    ```
-5. Para parar o ambiente:
+6. Para parar o ambiente:
    ```bash
    docker compose down
    ```
 
+> Também é possível executar o Compose a partir da raiz do repositório informando o caminho do arquivo:
+> ```bash
+> docker compose -f app/docker-compose.yml up --build -d
+> ```
+
 ## URLs
 
-- Frontend: `http://localhost:5173`
-- Backend: `http://localhost:3000`
-- pgAdmin: `http://localhost:5050`
-- Healthcheck backend: `http://localhost:3000/health`
+Conforme o mapeamento de portas definido em `app/docker-compose.yml`:
 
-## Banco via Rede Interna
+- Frontend: `http://localhost:3000`
+- Backend: `http://localhost:3001`
+- pgAdmin: `http://localhost:5433`
+- Healthcheck backend: `http://localhost:3001/health`
+- PostgreSQL no host: `localhost:5434`
 
-- A comunicação ocorre pela rede interna Docker `internal_net` (host `postgres`).
-- Para administração do banco, utilize o pgAdmin.
-- Configuração no pgAdmin:
+## Banco de Dados
+
+- Durante a execução via Docker Compose, o backend acessa o PostgreSQL pelo host interno Docker `postgres` e pela porta `5432`.
+- O serviço PostgreSQL é publicado no host pela porta `5434`, conforme o mapeamento `5434:5432` do Compose.
+- Para administração do banco, utilize o pgAdmin disponível em `http://localhost:5433`.
+- Configuração do servidor PostgreSQL no pgAdmin:
   - Host: `postgres`
   - Port: `5432`
-  - User: `secretaria_user`
-  - Password: `secretaria_pass`
-- Para acesso direto no host (ex.: DBeaver/psql), use:
+  - Database: `chatbot_academico`
+  - User: `postgres`
+  - Password: `postgres`
+- Para acesso direto pelo host, por ferramentas como DBeaver ou psql, use:
   - Host: `localhost`
-  - Port: `5433` (ou valor de `POSTGRES_PORT`)
+  - Port: `5434`
+  - Database: `chatbot_academico`
+  - User: `postgres`
+  - Password: `postgres`
 
 ## Usuários iniciais (seed)
 
