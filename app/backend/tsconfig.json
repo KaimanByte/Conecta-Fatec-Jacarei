@@ -18,6 +18,6 @@
     "allowSyntheticDefaultImports": true,
 
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../../nodeRoutes.ts"],
   "exclude": ["node_modules", "dist"]
 }
