@@ -268,3 +268,17 @@ footer2 img {
     height: 26px;
   }
 }
+/* Footer sem tag customizada: substitui o antigo seletor footer2 por classe reutilizável. */
+.app-footer-bottom {
+  background-color: #000000;
+  height: 6.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.app-footer-bottom img {
+  height: 40px;
+  width: auto;
+}

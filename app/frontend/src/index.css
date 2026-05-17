@@ -31,3 +31,23 @@ body {
 .dark {
   color-scheme: dark;
 }
+
+.loading-state {
+  width: 100%;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.inq-card-header {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+}
