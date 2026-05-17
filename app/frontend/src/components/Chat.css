@@ -301,3 +301,67 @@
   color: #ef4444;
   font-size: 0.75rem;
 }
+.textarea-field {
+  resize: none;
+}
+
+.footer-nav-form {
+  padding-top: 0.25rem;
+}
+
+.footer-nav-spaced {
+  margin-bottom: 0.5rem;
+}
+
+.btn-borderless {
+  border: none;
+}
+
+.loading-row {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dot-delay-0 {
+  animation-delay: 0ms;
+}
+
+.dot-delay-1 {
+  animation-delay: 300ms;
+}
+
+.dot-delay-2 {
+  animation-delay: 600ms;
+}
+
+.satisfaction-title {
+  font-weight: 500;
+  color: #374151;
+}
+
+.rate-icon {
+  font-size: 1.875rem;
+}
+
+.rate-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.rate-label.yes {
+  color: #15803d;
+}
+
+.rate-label.no {
+  color: #b91c1c;
+}
+
+.new-service-container {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.btn-new-service {
+  padding: 0.5rem 1.5rem;
+  width: auto;
+}
