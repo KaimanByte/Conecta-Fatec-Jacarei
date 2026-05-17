@@ -1,58 +1,17 @@
-import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { usePrivateAccess, type AccessValidator } from '../hooks/usePrivateAccess';
+import { LoadingState } from './common/LoadingState';
 
 type PrivateRouteProps = {
-  validateUrl: string;
-  setToken?: (v: string | null) => void;
+  validator: AccessValidator;
+  setToken?: (value: string | null) => void;
 };
 
-const PrivateRoute = ({ validateUrl, setToken }: PrivateRouteProps) => {
-  const [status, setStatus] = useState<'loading' | 'allowed' | 'denied'>('loading');
-
-  useEffect(() => {
-    const validateAccess = async () => {
-      const token = localStorage.getItem('token');
-
-      if (!token) {
-        setToken?.(null);
-        setStatus('denied');
-        return;
-      }
-
-      try {
-        const response = await fetch(validateUrl, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.status === 401 || response.status === 403) {
-          localStorage.removeItem('token');
-          setToken?.(null);
-          setStatus('denied');
-          return;
-        }
-
-        if (!response.ok) {
-          localStorage.removeItem('token');
-          setToken?.(null);
-          setStatus('denied');
-          return;
-        }
-
-        setStatus('allowed');
-      } catch {
-        localStorage.removeItem('token');
-        setToken?.(null);
-        setStatus('denied');
-      }
-    };
-
-    validateAccess();
-  }, [validateUrl, setToken]);
+const PrivateRoute = ({ validator, setToken }: PrivateRouteProps) => {
+  const status = usePrivateAccess(validator, setToken);
 
   if (status === 'loading') {
-    return <p>Carregando...</p>;
+    return <LoadingState />;
   }
 
   if (status === 'denied') {

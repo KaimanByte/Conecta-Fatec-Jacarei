@@ -301,37 +301,30 @@
   color: #ef4444;
   font-size: 0.75rem;
 }
-.textarea-field {
-  resize: none;
-}
-
-.footer-nav-form {
-  padding-top: 0.25rem;
-}
-
-.footer-nav-spaced {
-  margin-bottom: 0.5rem;
-}
-
-.btn-borderless {
-  border: none;
-}
-
-.loading-row {
+/* Refatoração 4.2/4.3: classes reutilizadas para evitar estilos inline no fluxo do chat. */
+.message-row--loading {
   align-items: center;
   gap: 0.5rem;
 }
 
-.dot-delay-0 {
-  animation-delay: 0ms;
+.dot--first { animation-delay: 0ms; }
+.dot--second { animation-delay: 300ms; }
+.dot--third { animation-delay: 600ms; }
+
+.input-field--textarea {
+  resize: none;
 }
 
-.dot-delay-1 {
-  animation-delay: 300ms;
+.footer-nav--compact {
+  padding-top: 0.25rem;
 }
 
-.dot-delay-2 {
-  animation-delay: 600ms;
+.footer-nav--spaced {
+  margin-bottom: 0.5rem;
+}
+
+.btn-secondary--borderless {
+  border: none;
 }
 
 .satisfaction-title {
@@ -339,29 +332,29 @@
   color: #374151;
 }
 
-.rate-icon {
+.rate-button-emoji {
   font-size: 1.875rem;
 }
 
-.rate-label {
+.rate-button-label {
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.rate-label.yes {
+.rate-button-label--yes {
   color: #15803d;
 }
 
-.rate-label.no {
+.rate-button-label--no {
   color: #b91c1c;
 }
 
-.new-service-container {
+.chat-done-actions {
   text-align: center;
   padding: 0.5rem 0;
 }
 
-.btn-new-service {
-  padding: 0.5rem 1.5rem;
+.btn-submit--auto {
   width: auto;
+  padding: 0.5rem 1.5rem;
 }

@@ -1,61 +1,37 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
-import {
-  ChatNode,
-  SatisfactionFlag,
-  getChatNode,
-  getChatNodes,
-  registerInteraction,
-  registerSatisfaction,
-} from '../services/chatService';
+import { chatService } from '../services/chatService';
+import type { ChatHistoryEntry, ChatMessage, ChatNode, ChatPhase, SatisfactionStatus } from '../types';
 
-export interface Message {
-  type: 'user' | 'bot';
-  text: string;
-  html?: boolean;
-}
-
-interface HistoryEntry {
-  nodeId: number | null;
-  title: string;
-}
-
-export type ChatPhase = 'chat' | 'inquiry' | 'satisfaction' | 'done';
+const WELCOME_MESSAGE = 'Olá! 👋 Bem-vindo ao autoatendimento acadêmico da Fatec Jacareí.\n\nEscolha uma opção abaixo:';
+const delay = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 function generateSessionId(): string {
   return crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2);
 }
 
-function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export function useChatFlow() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [nodes, setNodes] = useState<ChatNode[]>([]);
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [history, setHistory] = useState<ChatHistoryEntry[]>([]);
   const [loading, setLoading] = useState(false);
   const [phase, setPhase] = useState<ChatPhase>('chat');
-  const [sessionId, setSessionId] = useState(generateSessionId());
+  const [sessionId, setSessionId] = useState(generateSessionId);
+  const initializedRef = useRef(false);
 
   const addBotMessage = useCallback((text: string, html = false) => {
-    setMessages(prev => [...prev, { type: 'bot', text, html }]);
+    setMessages((currentMessages) => [...currentMessages, { type: 'bot', text, html }]);
   }, []);
 
-  const loadNodes = useCallback(async (parentId: number | null, currentSessionId: string) => {
+  const loadNodes = useCallback(async (parentId: number | null) => {
     setLoading(true);
 
     try {
-      const data = await getChatNodes(parentId);
-      setNodes(data);
+      const nextNodes = await chatService.listNodes(parentId);
+      setNodes(nextNodes);
 
       if (parentId === null) {
-        setMessages([
-          {
-            type: 'bot',
-            text: 'Olá! 👋 Bem-vindo ao autoatendimento acadêmico da Fatec Jacareí.\n\nEscolha uma opção abaixo:',
-          },
-        ]);
+        setMessages([{ type: 'bot', text: WELCOME_MESSAGE }]);
         setHistory([]);
       }
     } catch {
@@ -66,38 +42,38 @@ export function useChatFlow() {
     }
 
     try {
-      await registerInteraction(currentSessionId, parentId);
+      await chatService.registerNavigation(sessionId, parentId);
     } catch {
-      // O registro de log não deve bloquear a navegação do usuário no chat.
+      // Registro de log não deve interromper o atendimento.
     }
-  }, [addBotMessage]);
+  }, [addBotMessage, sessionId]);
 
   useEffect(() => {
-    loadNodes(null, sessionId);
-  }, []);
+    if (initializedRef.current) return;
+    initializedRef.current = true;
+    loadNodes(null);
+  }, [loadNodes]);
 
-  const selectNode = useCallback(async (node: ChatNode) => {
-    setMessages(prev => [...prev, { type: 'user', text: node.title }]);
+  const selectNode = async (node: ChatNode) => {
+    setMessages((currentMessages) => [...currentMessages, { type: 'user', text: node.title }]);
     setLoading(true);
     setNodes([]);
 
     try {
-      const data = await getChatNode(node.id);
-      await sleep(1150);
+      const selectedNode = await chatService.getNode(node.id);
+      await delay(700);
 
-      if (data.content) {
-        addBotMessage(data.content, true);
-      }
+      if (selectedNode.content) addBotMessage(selectedNode.content, true);
 
-      if (data.children && data.children.length > 0) {
-        setHistory(prev => [...prev, { nodeId: node.id, title: node.title }]);
+      setHistory((currentHistory) => [...currentHistory, { nodeId: node.id, title: node.title }]);
+
+      if (selectedNode.children?.length) {
         addBotMessage('Selecione uma opção:');
-        await sleep(500);
-        setNodes(data.children);
+        await delay(300);
+        setNodes(selectedNode.children);
       } else {
         setNodes([]);
-        setHistory(prev => [...prev, { nodeId: node.id, title: node.title }]);
-        setTimeout(() => setPhase('satisfaction'), 800);
+        window.setTimeout(() => setPhase('satisfaction'), 600);
       }
     } catch {
       addBotMessage('Erro ao carregar informação. Tente novamente.');
@@ -105,57 +81,51 @@ export function useChatFlow() {
     } finally {
       setLoading(false);
     }
-  }, [addBotMessage]);
+  };
 
-  const goBack = useCallback(() => {
+  const goBack = () => {
     if (history.length === 0) return;
 
-    const newHistory = history.slice(0, -1);
-    const parentEntry = newHistory[newHistory.length - 1];
+    const nextHistory = history.slice(0, -1);
+    const parentEntry = nextHistory[nextHistory.length - 1];
     const parentId = parentEntry ? parentEntry.nodeId : null;
 
-    setHistory(newHistory);
-    setMessages(prev => [...prev, { type: 'user', text: '← Voltar' }]);
+    setHistory(nextHistory);
+    setMessages((currentMessages) => [...currentMessages, { type: 'user', text: '← Voltar' }]);
     setPhase('chat');
-    loadNodes(parentId, sessionId);
-  }, [history, loadNodes, sessionId]);
+    loadNodes(parentId);
+  };
 
-  const restart = useCallback(() => {
-    const newSessionId = generateSessionId();
-    setSessionId(newSessionId);
-    setHistory([]);
-    setNodes([]);
+  const restart = () => {
     setPhase('chat');
-    loadNodes(null, newSessionId);
-  }, [loadNodes]);
+    setSessionId(generateSessionId());
+    loadNodes(null);
+  };
 
-  const openInquiry = useCallback(() => setPhase('inquiry'), []);
-  const closeInquiry = useCallback(() => setPhase('chat'), []);
-
-  const finishInquiry = useCallback(() => {
-    addBotMessage('✅ Dúvida enviada com sucesso! A secretaria responderá no seu e-mail em breve.');
-    setPhase('done');
-  }, [addBotMessage]);
-
-  const handleSatisfaction = useCallback(async (flag: SatisfactionFlag) => {
+  const sendSatisfaction = async (satisfaction: SatisfactionStatus) => {
     try {
-      await registerSatisfaction(sessionId, flag);
+      await chatService.registerSatisfaction(sessionId, satisfaction);
     } catch {
-      // A avaliação não deve impedir a continuidade do atendimento.
+      // Falha no log não impede a continuação do fluxo.
     }
 
     addBotMessage(
-      flag === 'ATENDEU'
+      satisfaction === 'ATENDEU'
         ? '😊 Ótimo! Fico feliz em ajudar. Até a próxima!'
         : '😕 Entendido. Você pode enviar sua dúvida para a secretaria.',
     );
 
-    if (flag === 'NAO_ATENDEU') {
-      setTimeout(() => setPhase('inquiry'), 600);
+    if (satisfaction === 'NAO_ATENDEU') {
+      window.setTimeout(() => setPhase('inquiry'), 600);
     } else {
       setPhase('done');
     }
-  }, [addBotMessage, sessionId]);
+  };
+
+  const markInquiryAsSent = () => {
+    addBotMessage('✅ Dúvida enviada com sucesso! A secretaria responderá no seu e-mail em breve.');
+    setPhase('done');
+  };
 
   return {
     messages,
@@ -164,12 +134,11 @@ export function useChatFlow() {
     loading,
     phase,
     sessionId,
+    setPhase,
     selectNode,
     goBack,
     restart,
-    openInquiry,
-    closeInquiry,
-    finishInquiry,
-    handleSatisfaction,
+    sendSatisfaction,
+    markInquiryAsSent,
   };
 }
