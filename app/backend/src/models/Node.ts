@@ -23,14 +23,30 @@ Node.init({
   },
   parentId: {
     type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'Nodes',
+      key: 'id',
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
   },
 }, {
   sequelize,
   modelName: 'Node',
+  indexes: [
+    {
+      name: 'idx_nodes_parent_id',
+      fields: ['parentId'],
+    },
+    {
+      name: 'idx_nodes_title',
+      fields: ['title'],
+    },
+  ],
 });
 
 Node.belongsTo(Node, { foreignKey: 'parentId', as: 'parent' });
 Node.hasMany(Node, { foreignKey: 'parentId', sourceKey: 'id', as: 'children' });
 
 export default Node;
-

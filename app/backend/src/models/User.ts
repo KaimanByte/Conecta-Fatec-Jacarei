@@ -35,6 +35,13 @@ User.init({
   sequelize,
   modelName: 'User',
   timestamps: true,
+  indexes: [
+    {
+      name: 'idx_users_email',
+      unique: true,
+      fields: ['email'],
+    },
+  ],
   hooks: {
     beforeCreate: async (user) => {
       const plainPassword = user.getDataValue('password') as string;
@@ -47,4 +54,3 @@ User.init({
 });
 
 export default User;
-

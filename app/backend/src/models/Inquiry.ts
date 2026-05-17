@@ -27,13 +27,44 @@ Inquiry.init(
       allowNull: false,
       defaultValue: 'ABERTA',
     },
-    answeredBy: { type: DataTypes.INTEGER, allowNull: true },
+    answeredBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+    },
     answerText: { type: DataTypes.TEXT, allowNull: true },
     attachmentName: { type: DataTypes.STRING(255), allowNull: true },
     attachmentMime: { type: DataTypes.STRING(100), allowNull: true },
     attachmentData: { type: DataTypes.BLOB('long'), allowNull: true },
   },
-  { sequelize, modelName: 'Inquiry', tableName: 'inquiries' }
+  {
+    sequelize,
+    modelName: 'Inquiry',
+    tableName: 'inquiries',
+    indexes: [
+      {
+        name: 'idx_inquiries_status',
+        fields: ['status'],
+      },
+      {
+        name: 'idx_inquiries_created_at',
+        fields: ['createdAt'],
+      },
+      {
+        name: 'idx_inquiries_status_created_at',
+        fields: ['status', 'createdAt'],
+      },
+      {
+        name: 'idx_inquiries_answered_by',
+        fields: ['answeredBy'],
+      },
+    ],
+  }
 );
 
 export default Inquiry;
