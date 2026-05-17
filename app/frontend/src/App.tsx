@@ -139,13 +139,13 @@ function App() {
                 <footer2>
                   <img src="SP.webp"></img>
                   {/* Link área admin */}
-                      <div className="app-footer__admin-link">
-                        {!token ? (
-                          <a href="/login">Área Admin</a>
-                        ) : (
-                          <a href="/admin/inquiries" className="bold">Ir para o Painel</a>
-                        )}
-                      </div>
+                  <div className="app-footer__admin-link">
+                    {!token ? (
+                      <a href="/login">Área Admin</a>
+                    ) : (
+                      <a href="/admin/inquiries" className="bold">Ir para o Painel</a>
+                    )}
+                  </div>
                 </footer2>
 
               </div>
@@ -155,15 +155,27 @@ function App() {
           {/* ── LOGIN ── */}
           <Route
             path="/login"
-            element={token ? <Navigate to="/admin" replace /> : <Login setToken={setToken} />}
+            element={<Login setToken={setToken} />}
           />
 
-          {/* ── ADMIN (protegido) ── */}
-          <Route element={<PrivateRoute />}>
+          {/* ── ROTAS SOMENTE ADMIN ── */}
+          <Route
+            element={
+              <PrivateRoute validateUrl="http://localhost:3001/api/auth/validate-admin" setToken={setToken} />
+            }
+          >
             <Route path="/admin" element={<AdminNodes setToken={setToken} />} />
             <Route path="/admin/nodes" element={<AdminNodes setToken={setToken} />} />
-            <Route path="/admin/inquiries" element={<AdminInquiries setToken={setToken} />} />
             <Route path="/admin/logs" element={<AdminLogs setToken={setToken} />} />
+          </Route>
+
+          {/* ── ROTAS SECRETÁRIA + ADMIN ── */}
+          <Route
+            element={
+              <PrivateRoute validateUrl="http://localhost:3001/api/auth/validate-secretary" setToken={setToken}/>
+            }
+          >
+            <Route path="/admin/inquiries" element={<AdminInquiries setToken={setToken} />} />
           </Route>
 
           {/* ── CATCH-ALL ── */}

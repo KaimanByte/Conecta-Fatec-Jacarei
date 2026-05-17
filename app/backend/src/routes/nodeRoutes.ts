@@ -74,7 +74,7 @@ router.get('/chat/node/:id', getChatNode);
  *       200:
  *         description: Lista total de nós
  */
-router.get('/admin/nodes', auth, rbac(['admin', 'secretary']), listAdminNodes);
+router.get('/admin/nodes', auth, rbac(['admin']), listAdminNodes);
 
 /**
  * @openapi
@@ -99,7 +99,7 @@ router.get('/admin/nodes', auth, rbac(['admin', 'secretary']), listAdminNodes);
  *       201:
  *         description: Nó criado com sucesso
  */
-router.post('/admin/nodes', auth, rbac(['admin', 'secretary']), validate(nodeSchema), createNode);
+router.post('/admin/nodes', auth, rbac(['admin']), validate(nodeSchema), createNode);
 
 /**
  * @openapi
@@ -128,7 +128,7 @@ router.post('/admin/nodes', auth, rbac(['admin', 'secretary']), validate(nodeSch
  *       200:
  *         description: Nó atualizado
  */
-router.put('/admin/nodes/:id', auth, rbac(['admin', 'secretary']), validate(nodeSchema), updateNode);
+router.put('/admin/nodes/:id', auth, rbac(['admin']), validate(nodeSchema), updateNode);
 
 /**
  * @openapi
@@ -147,6 +147,6 @@ router.put('/admin/nodes/:id', auth, rbac(['admin', 'secretary']), validate(node
  *       200:
  *         description: Nó excluído
  */
-router.delete('/admin/nodes/:id', auth, rbac(['admin', 'secretary']), deleteNode);
+router.delete('/admin/nodes/:id', auth, rbac(['admin']), deleteNode);
 
 export default router;

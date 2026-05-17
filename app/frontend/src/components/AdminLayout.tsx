@@ -1,6 +1,7 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { LayoutDashboard, MessageSquare, ListTree, LogOut, ChevronRight, Sun, Moon } from 'lucide-react';
+import { jwtDecode } from 'jwt-decode';
 
 const AdminLayout = ({ children, setToken }: { children: ReactNode, setToken?: (v: string | null) => void }) => {
   const navigate = useNavigate();
@@ -8,6 +9,31 @@ const AdminLayout = ({ children, setToken }: { children: ReactNode, setToken?: (
   const [darkMode, setDarkMode] = useState(() => {
   return localStorage.getItem('theme') === 'dark';
 });
+
+type UserRole = 'student' | 'secretary' | 'admin';
+
+interface JWT_Payload {
+  id: number;
+  role: UserRole;
+}
+const [userRole, setUserRole] = useState<UserRole | null>(null);
+
+useEffect(() => {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    navigate('/login');
+    return;
+  }
+
+  try {
+    const decoded = jwtDecode<JWT_Payload>(token);
+    setUserRole(decoded.role);
+  } catch (error) {
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
+}, [navigate]);
 
 const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -28,11 +54,16 @@ const [sidebarOpen, setSidebarOpen] = useState(true);
   };
 
   const menuItems = [
-    { name: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={20} /> },
-    { name: 'Gestão de Nós', path: '/admin/nodes', icon: <ListTree size={20} /> },
-    { name: 'Dúvidas', path: '/admin/inquiries', icon: <MessageSquare size={20} /> },
-    { name: 'Logs e Satisfação', path: '/admin/logs', icon: <ChevronRight size={20} /> },
-  ];
+  { name: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={20} />, roles: ['admin'] as UserRole[]},
+  { name: 'Gestão de Nós', path: '/admin/nodes', icon: <ListTree size={20} />,roles: ['admin'] as UserRole[]},
+  { name: 'Dúvidas', path: '/admin/inquiries', icon: <MessageSquare size={20} />, roles: ['secretary', 'admin'] as UserRole[]},
+  { name: 'Logs e Satisfação', path: '/admin/logs', icon: <ChevronRight size={20} />, roles: ['admin'] as UserRole[],}
+];
+
+const visibleMenuItems = menuItems.filter((item) => {
+  if (!userRole) return false;
+  return item.roles.includes(userRole);
+});
 
   return (
     <div className="admin-layout">
@@ -47,8 +78,8 @@ const [sidebarOpen, setSidebarOpen] = useState(true);
           </h2>
         </div>
 
-        {/* <nav className="sidebar-nav">
-          {menuItems.map((item) => (
+        <nav className="sidebar-nav">
+          {visibleMenuItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -58,14 +89,14 @@ const [sidebarOpen, setSidebarOpen] = useState(true);
               <span className="nav-link-label">{item.name}</span>
             </Link>
           ))}
-        </nav> */}
-        <nav className="sidebar-nav">
+        </nav>
+        {/* <nav className="sidebar-nav">
             <Link key='/admin/inquiries' to='/admin/inquiries' className={`nav-link ${location.pathname === '/admin/inquiries' ? 'nav-link--active' : ''}`}
             >
               {<MessageSquare size={20} />}
               <span className="nav-link-label">Dúvidas</span>
             </Link>
-        </nav>
+        </nav> */}
 
         <div className="sidebar-footer">
           <button onClick={handleLogout} className="logout-btn">
