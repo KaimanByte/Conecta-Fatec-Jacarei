@@ -21,16 +21,15 @@ import './AdminLogs.css';
 const filters: SatisfactionFilter[] = ['TODAS', 'ATENDEU', 'NAO_ATENDEU'];
 
 const filterLabel: Record<SatisfactionFilter, string> = {
-  TODAS: 'Tudo',
-  ATENDEU: 'Satisfeitos',
-  NAO_ATENDEU: 'Insatisfeitos',
+  TODAS: 'TUDO',
+  ATENDEU: 'SATISFEITOS',
+  NAO_ATENDEU: 'INSATISFEITOS',
 };
 
 const tooltipStyle = {
-  backgroundColor: '#1e293b',
+  backgroundColor: '#f3f4f6',
   border: 'none',
   borderRadius: '8px',
-  color: '#ffffff',
 };
 
 const AdminLogs = ({ setToken }: { setToken?: (value: string | null) => void }) => {
@@ -111,7 +110,7 @@ const AdminLogs = ({ setToken }: { setToken?: (value: string | null) => void }) 
                     <Cell key={entry.name} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={tooltipStyle} />
+                 <Tooltip contentStyle={tooltipStyle} labelStyle={{ color: '#111827' }}/>
                 <Legend />
               </PieChart>
             </ResponsiveContainer>
@@ -126,8 +125,8 @@ const AdminLogs = ({ setToken }: { setToken?: (value: string | null) => void }) 
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                 <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8' }} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8' }} />
-                <Tooltip cursor={{ fill: 'rgba(79, 70, 229, 0.05)' }} contentStyle={tooltipStyle} />
-                <Bar dataKey="count" fill="#4f46e5" radius={[4, 4, 0, 0]} barSize={32} />
+                <Tooltip cursor={{ fill: '#f6f3f500' }} contentStyle={tooltipStyle} labelStyle={{ color: '#111827' }} itemStyle={{ color: '#111827' }} />
+                <Bar dataKey="count" fill="#b20000" radius={[4, 4, 0, 0]} barSize={32} />
               </BarChart>
             </ResponsiveContainer>
           </div>

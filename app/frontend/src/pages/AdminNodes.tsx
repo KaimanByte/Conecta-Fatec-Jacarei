@@ -35,7 +35,7 @@ const AdminNodes = ({ setToken }: { setToken?: (value: string | null) => void })
 
         <button onClick={openCreateModal} className="admin-nodes-create-button" type="button">
           <Plus size={20} />
-          Novo Canal
+          NOVO CANAL
         </button>
       </div>
 
