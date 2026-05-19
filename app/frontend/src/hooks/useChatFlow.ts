@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 import { chatService } from '../services/chatService';
 import type { ChatHistoryEntry, ChatMessage, ChatNode, ChatPhase, SatisfactionStatus } from '../types';
 
-const WELCOME_MESSAGE = 'Olá! 👋 Bem-vindo ao autoatendimento acadêmico da Fatec Jacareí.\n\nEscolha uma opção abaixo:';
+const WELCOME_MESSAGE = 'Olá! 👋 Bem-vindo ao autoatendimento acadêmico da Fatec Jacareí.\n\nEu sou a Fernanda, sua assistente virtual!\n\nEscolha uma opção abaixo para prosseguir:';
 const delay = (milliseconds: number) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 function generateSessionId(): string {

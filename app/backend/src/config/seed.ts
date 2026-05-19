@@ -507,25 +507,13 @@ async function createChatTree() {
 
   const createdNodes = new Map<string, any>();
 
-  const root = await ChatNode.create({
-    title: 'Início',
-    content: 'Olá! Sou o assistente virtual da Fatec Jacareí. Escolha uma das opções abaixo para começar:',
-  } as any);
-
-  createdNodes.set('root', root);
-
   for (const node of seedNodes) {
-    const parent = node.parentKey ? createdNodes.get(node.parentKey) : root;
-
-    if (!parent) {
-      console.warn(`⚠️ Nó ignorado porque o pai não foi encontrado: ${node.title} (${node.parentKey})`);
-      continue;
-    }
+    const parent = node.parentKey ? createdNodes.get(node.parentKey) : null;
 
     const created = await ChatNode.create({
       title: node.title,
       content: node.content || null,
-      parentId: parent.id,
+      parentId: parent ? parent.id : null,
     } as any);
 
     createdNodes.set(node.key, created);
