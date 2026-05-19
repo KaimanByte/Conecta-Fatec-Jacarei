@@ -307,9 +307,9 @@
   gap: 0.5rem;
 }
 
-.dot--first { animation-delay: 0ms; }
-.dot--second { animation-delay: 300ms; }
-.dot--third { animation-delay: 600ms; }
+.dot--first { animation-delay: 0s; }
+.dot--second { animation-delay: 0.15s; }
+.dot--third { animation-delay: 0.30s; }
 
 .input-field--textarea {
   resize: none;
