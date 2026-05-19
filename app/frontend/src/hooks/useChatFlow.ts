@@ -61,7 +61,7 @@ export function useChatFlow() {
 
     try {
       const selectedNode = await chatService.getNode(node.id);
-      await delay(700);
+      await delay(1150);
 
       if (selectedNode.content) addBotMessage(selectedNode.content, true);
 
