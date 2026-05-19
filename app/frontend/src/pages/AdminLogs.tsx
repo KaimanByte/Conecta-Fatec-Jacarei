@@ -30,7 +30,7 @@ const tooltipStyle = {
   backgroundColor: '#1e293b',
   border: 'none',
   borderRadius: '8px',
-  color: '#fff',
+  color: '#ffffff',
 };
 
 const AdminLogs = ({ setToken }: { setToken?: (value: string | null) => void }) => {

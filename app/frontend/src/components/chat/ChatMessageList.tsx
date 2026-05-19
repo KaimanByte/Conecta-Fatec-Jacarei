@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import type { ChatMessage } from '../../types';
 import { sanitizeHtml } from '../../utils/sanitizeHtml';
 
@@ -43,19 +43,71 @@ function ChatMessageItem({ message }: { message: ChatMessage }) {
   );
 }
 
-export default function ChatMessageList({ messages, loading }: { messages: ChatMessage[]; loading: boolean }) {
+export default function ChatMessageList({
+  messages,
+  loading,
+}: {
+  messages: ChatMessage[];
+  loading: boolean;
+}) {
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  const scrollMessagesToBottom = useCallback(() => {
+    bottomRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, []);
+
+  const scrollChatToActions = useCallback(() => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const actionsPanel = document.querySelector('.actions-panel');
+
+        if (actionsPanel) {
+          actionsPanel.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+          });
+        }
+      });
+    });
+  }, []);
+
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [messages, loading]);
+    scrollMessagesToBottom();
+  }, [messages, loading, scrollMessagesToBottom]);
+
+  useEffect(() => {
+    const actionsPanel = document.querySelector('.actions-panel');
+
+    if (!actionsPanel) return;
+
+    const observer = new MutationObserver(() => {
+      scrollChatToActions();
+    });
+
+    observer.observe(actionsPanel, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [scrollChatToActions]);
 
   return (
     <div className="messages-container">
       {messages.map((message, index) => (
-        <ChatMessageItem key={`${message.type}-${index}-${message.text.slice(0, 12)}`} message={message} />
+        <ChatMessageItem
+          key={`${message.type}-${index}-${message.text.slice(0, 12)}`}
+          message={message}
+        />
       ))}
+
       {loading && <LoadingDots />}
+
       <div ref={bottomRef} />
     </div>
   );
