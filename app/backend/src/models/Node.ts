@@ -1,11 +1,13 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional, ForeignKey } from 'sequelize';
 import sequelize from '../config/database.js';
 
-class Node extends Model {
-  public id!: number;
-  public title!: string;
-  public content!: string;
-  public parentId?: number;
+class Node extends Model<InferAttributes<Node, { omit: 'createdAt' | 'updatedAt' }>, InferCreationAttributes<Node, { omit: 'createdAt' | 'updatedAt' }>> {
+  declare id: CreationOptional<number>;
+  declare title: string;
+  declare content: string | null;
+  declare parentId: ForeignKey<Node['id']> | null;
+  declare readonly createdAt: CreationOptional<Date>;
+  declare readonly updatedAt: CreationOptional<Date>;
 }
 
 Node.init({
@@ -20,6 +22,7 @@ Node.init({
   },
   content: {
     type: DataTypes.TEXT,
+    allowNull: true,
   },
   parentId: {
     type: DataTypes.INTEGER,

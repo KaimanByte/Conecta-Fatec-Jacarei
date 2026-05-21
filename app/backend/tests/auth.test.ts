@@ -1,21 +1,29 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, type Mock } from 'vitest';
+import type { NextFunction, Request, Response } from 'express';
+import jwt, { type JwtPayload } from 'jsonwebtoken';
 import { auth, rbac } from '../src/middleware/auth';
-import jwt from 'jsonwebtoken';
 
 vi.mock('jsonwebtoken');
 
-const mockResponse = () => {
-  const res: any = {};
+type MockResponse = Response & {
+  status: Mock;
+  json: Mock;
+};
+
+const mockResponse = (): MockResponse => {
+  const res = {} as MockResponse;
   res.status = vi.fn().mockReturnValue(res);
   res.json = vi.fn().mockReturnValue(res);
   return res;
 };
 
+const mockNext = (): NextFunction => vi.fn() as unknown as NextFunction;
+
 describe('Auth Middleware', () => {
   it('should return 401 if no authorization header', async () => {
-    const req = { headers: {} } as any;
+    const req = { headers: {} } as Request;
     const res = mockResponse();
-    const next = vi.fn();
+    const next = mockNext();
 
     await auth(req, res, next);
 
@@ -24,11 +32,12 @@ describe('Auth Middleware', () => {
   });
 
   it('should call next if token is valid', async () => {
-    const req = { headers: { authorization: 'Bearer valid-token' } } as any;
+    const req = { headers: { authorization: 'Bearer valid-token' } } as Request;
     const res = mockResponse();
-    const next = vi.fn();
-    
-    vi.mocked(jwt.verify).mockReturnValue({ id: 1, role: 'admin' } as any);
+    const next = mockNext();
+    const payload: JwtPayload = { id: 1, role: 'admin' };
+
+    vi.mocked(jwt.verify).mockReturnValue(payload);
 
     await auth(req, res, next);
 
@@ -37,10 +46,10 @@ describe('Auth Middleware', () => {
   });
 
   it('should return 401 if token is invalid', async () => {
-    const req = { headers: { authorization: 'Bearer invalid-token' } } as any;
+    const req = { headers: { authorization: 'Bearer invalid-token' } } as Request;
     const res = mockResponse();
-    const next = vi.fn();
-    
+    const next = mockNext();
+
     vi.mocked(jwt.verify).mockImplementation(() => { throw new Error('Invalid'); });
 
     await auth(req, res, next);
@@ -52,9 +61,9 @@ describe('Auth Middleware', () => {
 
 describe('RBAC Middleware', () => {
   it('should return 403 if user role is not allowed', () => {
-    const req = { user: { role: 'secretary' } } as any;
+    const req = { user: { id: 1, role: 'secretary' } } as Request;
     const res = mockResponse();
-    const next = vi.fn();
+    const next = mockNext();
 
     const middleware = rbac(['admin']);
     middleware(req, res, next);
@@ -64,9 +73,9 @@ describe('RBAC Middleware', () => {
   });
 
   it('should call next if user role is allowed', () => {
-    const req = { user: { role: 'admin' } } as any;
+    const req = { user: { id: 1, role: 'admin' } } as Request;
     const res = mockResponse();
-    const next = vi.fn();
+    const next = mockNext();
 
     const middleware = rbac(['admin', 'secretary']);
     middleware(req, res, next);

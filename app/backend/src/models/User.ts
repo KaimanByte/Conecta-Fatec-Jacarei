@@ -1,14 +1,16 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 import sequelize from '../config/database.js';
 import bcrypt from 'bcrypt';
 
-class User extends Model {
-  public id!: number;
-  public email!: string;
-  public password!: string;
-  public role!: 'student' | 'secretary' | 'admin';
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+export type UserRole = 'student' | 'secretary' | 'admin';
+
+class User extends Model<InferAttributes<User, { omit: 'createdAt' | 'updatedAt' }>, InferCreationAttributes<User, { omit: 'createdAt' | 'updatedAt' }>> {
+  declare id: CreationOptional<number>;
+  declare email: string;
+  declare password: string;
+  declare role: CreationOptional<UserRole>;
+  declare readonly createdAt: CreationOptional<Date>;
+  declare readonly updatedAt: CreationOptional<Date>;
 }
 
 User.init({
@@ -43,11 +45,9 @@ User.init({
     },
   ],
   hooks: {
-    beforeCreate: async (user) => {
-      const plainPassword = user.getDataValue('password') as string;
-      if (plainPassword) {
-        const hashedPassword = await bcrypt.hash(plainPassword, 10);
-        user.setDataValue('password', hashedPassword);
+    beforeCreate: async (user: User) => {
+      if (user.password) {
+        user.password = await bcrypt.hash(user.password, 10);
       }
     },
   },

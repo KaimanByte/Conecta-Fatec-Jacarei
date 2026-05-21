@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Op } from 'sequelize';
+import { Op, WhereOptions } from 'sequelize';
 import { Node } from '../models/index.js';
 
 const isInvalidId = (value: string | undefined): boolean => {
@@ -57,10 +57,11 @@ export const getChatNode = async (req: Request, res: Response) => {
 export const listAdminNodes = async (req: Request, res: Response) => {
   try {
     const { search } = req.query;
-    const where: any = {};
+    const where: WhereOptions = {};
+    const searchText = typeof search === 'string' ? search.trim() : '';
 
-    if (search) {
-      where.title = { [Op.iLike]: `%${search}%` };
+    if (searchText) {
+      where.title = { [Op.iLike]: `%${searchText}%` };
     }
 
     const nodes = await Node.findAll({
@@ -79,7 +80,11 @@ export const listAdminNodes = async (req: Request, res: Response) => {
 export const createNode = async (req: Request, res: Response) => {
   try {
     const { title, content, parentId } = req.body;
-    const node = await Node.create({ title, content, parentId: parentId || null } as any);
+    const node = await Node.create({
+      title,
+      content: content ?? null,
+      parentId: parentId ? Number(parentId) : null,
+    });
 
     res.status(201).json(node);
   } catch (err) {

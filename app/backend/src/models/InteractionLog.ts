@@ -1,13 +1,16 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional, ForeignKey } from 'sequelize';
 import sequelize from '../config/database.js';
+import Inquiry from './Inquiry.js';
 
-class InteractionLog extends Model {
-  public id!: number;
-  public sessionId!: string;
-  public navigationFlow!: number[];
-  public inquiryId?: number;
-  public satisfaction?: 'ATENDEU' | 'NAO_ATENDEU';
-  public readonly createdAt!: Date;
+export type SatisfactionStatus = 'ATENDEU' | 'NAO_ATENDEU';
+
+class InteractionLog extends Model<InferAttributes<InteractionLog, { omit: 'createdAt' }>, InferCreationAttributes<InteractionLog, { omit: 'createdAt' }>> {
+  declare id: CreationOptional<number>;
+  declare sessionId: CreationOptional<string>;
+  declare navigationFlow: CreationOptional<number[]>;
+  declare inquiryId: ForeignKey<Inquiry['id']> | null;
+  declare satisfaction: SatisfactionStatus | null;
+  declare readonly createdAt: CreationOptional<Date>;
 }
 
 InteractionLog.init(
@@ -55,5 +58,8 @@ InteractionLog.init(
     ],
   }
 );
+
+InteractionLog.belongsTo(Inquiry, { foreignKey: 'inquiryId', as: 'inquiry' });
+Inquiry.hasMany(InteractionLog, { foreignKey: 'inquiryId', as: 'interactionLogs' });
 
 export default InteractionLog;

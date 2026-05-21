@@ -36,7 +36,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // ─── Test routes ──────────────────────────────────────────────────────────────
 app.get('/test/auth', auth, (req: Request, res: Response) => {
-  res.json({ message: 'Auth OK', user: (req as any).user });
+  res.json({ message: 'Auth OK', user: req.user });
 });
 
 // ─── Root ─────────────────────────────────────────────────────────────────────
