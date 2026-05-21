@@ -1,19 +1,22 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional, ForeignKey } from 'sequelize';
 import sequelize from '../config/database.js';
+import User from './User.js';
 
-class Inquiry extends Model {
-  public id!: number;
-  public requesterName!: string;
-  public requesterEmail!: string;
-  public question!: string;
-  public status!: 'ABERTA' | 'RESPONDIDA';
-  public answeredBy?: number;
-  public answerText?: string;
-  public attachmentName?: string;
-  public attachmentMime?: string;
-  public attachmentData?: Buffer;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+export type InquiryStatus = 'ABERTA' | 'RESPONDIDA';
+
+class Inquiry extends Model<InferAttributes<Inquiry, { omit: 'createdAt' | 'updatedAt' }>, InferCreationAttributes<Inquiry, { omit: 'createdAt' | 'updatedAt' }>> {
+  declare id: CreationOptional<number>;
+  declare requesterName: string;
+  declare requesterEmail: string;
+  declare question: string;
+  declare status: CreationOptional<InquiryStatus>;
+  declare answeredBy: ForeignKey<User['id']> | null;
+  declare answerText: string | null;
+  declare attachmentName: string | null;
+  declare attachmentMime: string | null;
+  declare attachmentData: Buffer | null;
+  declare readonly createdAt: CreationOptional<Date>;
+  declare readonly updatedAt: CreationOptional<Date>;
 }
 
 Inquiry.init(
@@ -66,5 +69,8 @@ Inquiry.init(
     ],
   }
 );
+
+Inquiry.belongsTo(User, { foreignKey: 'answeredBy', as: 'answerer' });
+User.hasMany(Inquiry, { foreignKey: 'answeredBy', as: 'answeredInquiries' });
 
 export default Inquiry;

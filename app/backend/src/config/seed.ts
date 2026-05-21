@@ -476,7 +476,7 @@ async function createAdminUser() {
       email: adminEmail,
       password: 'admin123',
       role: 'admin',
-    } as any);
+    });
 
     console.log('✅ Usuário admin criado com sucesso.');
   }
@@ -491,7 +491,7 @@ async function createSecretaryUser() {
       email: secretaryEmail,
       password: 'secretaria123',
       role: 'secretary',
-    } as any);
+    });
 
     console.log('✅ Usuário secretaria criado com sucesso.');
   }
@@ -505,7 +505,7 @@ async function createChatTree() {
     return;
   }
 
-  const createdNodes = new Map<string, any>();
+  const createdNodes = new Map<string, ChatNode>();
 
   for (const node of seedNodes) {
     const parent = node.parentKey ? createdNodes.get(node.parentKey) : null;
@@ -514,7 +514,7 @@ async function createChatTree() {
       title: node.title,
       content: node.content || null,
       parentId: parent ? parent.id : null,
-    } as any);
+    });
 
     createdNodes.set(node.key, created);
   }
