@@ -11,10 +11,9 @@ interface AdminLayoutProps {
 }
 
 const menuItems = [
-  { name: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={20} />, roles: ['admin'] as UserRole[] },
-  { name: 'Gestão de Nós', path: '/admin/nodes', icon: <ListTree size={20} />, roles: ['admin'] as UserRole[] },
   { name: 'Dúvidas', path: '/admin/inquiries', icon: <MessageSquare size={20} />, roles: ['secretary', 'admin'] as UserRole[] },
-  { name: 'Logs e Satisfação', path: '/admin/logs', icon: <ChevronRight size={20} />, roles: ['admin'] as UserRole[] },
+  { name: 'Gestão de Nós', path: '/admin', icon: <ListTree size={20} />, roles: ['admin'] as UserRole[] },
+  { name: 'Dashboard', path: '/admin/logs', icon: <LayoutDashboard size={20} />, roles: ['admin'] as UserRole[] },
 ];
 
 const AdminLayout = ({ children, setToken }: AdminLayoutProps) => {
