@@ -1,9 +1,21 @@
 import { Request, Response } from 'express';
-import { Op, WhereOptions } from 'sequelize';
-import { Node } from '../models/index.js';
+import { AppError } from '../errors/AppError.js';
+import { NodeService } from '../services/NodeService.js';
+
+const nodeService = new NodeService();
 
 const isInvalidId = (value: string | undefined): boolean => {
   return value !== undefined && isNaN(Number(value));
+};
+
+const handleError = (err: unknown, res: Response, fallbackMessage = 'Erro interno do servidor') => {
+  if (err instanceof AppError) {
+    res.status(err.statusCode).json({ error: err.message });
+    return;
+  }
+
+  console.error(err);
+  res.status(500).json({ error: fallbackMessage });
 };
 
 export const listChatNodes = async (req: Request, res: Response) => {
@@ -15,16 +27,12 @@ export const listChatNodes = async (req: Request, res: Response) => {
       return;
     }
 
-    const id = paramId ? Number(paramId) : null;
-    const nodes = await Node.findAll({
-      where: id ? { parentId: id } : { parentId: null },
-      attributes: ['id', 'title', 'content'],
-    });
+    const id = paramId ? Number(paramId) : undefined;
+    const nodes = await nodeService.listChatNodes(id);
 
     res.json(nodes);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    handleError(err, res);
   }
 };
 
@@ -37,94 +45,52 @@ export const getChatNode = async (req: Request, res: Response) => {
       return;
     }
 
-    const node = await Node.findOne({
-      where: { id: Number(paramId) },
-      include: [{ model: Node, as: 'children' }],
-    });
-
-    if (!node) {
-      res.status(404).json({ error: 'Nó não encontrado' });
-      return;
-    }
-
+    const node = await nodeService.getChatNode(Number(paramId));
     res.json(node);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    handleError(err, res);
   }
 };
 
 export const listAdminNodes = async (req: Request, res: Response) => {
   try {
-    const { search } = req.query;
-    const where: WhereOptions = {};
-    const searchText = typeof search === 'string' ? search.trim() : '';
-
-    if (searchText) {
-      where.title = { [Op.iLike]: `%${searchText}%` };
-    }
-
-    const nodes = await Node.findAll({
-      where,
-      attributes: ['id', 'title', 'content', 'parentId'],
-      order: [['id', 'ASC']],
-    });
+    const search = typeof req.query.search === 'string' ? req.query.search : undefined;
+    const nodes = await nodeService.listAdminNodes(search);
 
     res.json(nodes);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    handleError(err, res);
   }
 };
 
 export const createNode = async (req: Request, res: Response) => {
   try {
     const { title, content, parentId } = req.body;
-    const node = await Node.create({
-      title,
-      content: content ?? null,
-      parentId: parentId ? Number(parentId) : null,
-    });
+    const node = await nodeService.createNode({ title, content, parentId });
 
     res.status(201).json(node);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    handleError(err, res);
   }
 };
 
 export const updateNode = async (req: Request, res: Response) => {
   try {
     const { title, content, parentId } = req.body;
-    const [count] = await Node.update(
-      { title, content, parentId: parentId ?? null },
-      { where: { id: Number(req.params.id) } }
-    );
+    const result = await nodeService.updateNode(Number(req.params.id), { title, content, parentId });
 
-    if (count === 0) {
-      res.status(404).json({ error: 'Nó não encontrado' });
-      return;
-    }
-
-    res.json({ message: 'Nó atualizado' });
+    res.json(result);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    handleError(err, res);
   }
 };
 
 export const deleteNode = async (req: Request, res: Response) => {
   try {
-    const count = await Node.destroy({ where: { id: Number(req.params.id) } });
+    const result = await nodeService.deleteNode(Number(req.params.id));
 
-    if (count === 0) {
-      res.status(404).json({ error: 'Nó não encontrado' });
-      return;
-    }
-
-    res.json({ message: 'Nó excluído' });
+    res.json(result);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    handleError(err, res);
   }
 };
