@@ -1,11 +1,21 @@
 import { Router, Request, Response } from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { User } from '../models/index.js';
 import { validate, loginSchema } from '../middleware/validate.js';
 import { auth, rbac } from '../middleware/auth.js';
+import { AuthService } from '../services/AuthService.js';
+import { AppError } from '../errors/AppError.js';
 
 const router = Router();
+const authService = new AuthService();
+
+const handleError = (err: unknown, res: Response) => {
+  if (err instanceof AppError) {
+    res.status(err.statusCode).json({ error: err.message });
+    return;
+  }
+
+  console.error(err);
+  res.status(500).json({ error: 'Erro interno do servidor' });
+};
 
 /**
  * @openapi
@@ -39,39 +49,11 @@ const router = Router();
 router.post('/login', validate(loginSchema), async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    
-    const user = await User.findOne({ where: { email } });
+    const result = await authService.login(email, password);
 
-    if (!user) {
-      res.status(401).json({ error: 'Credenciais inválidas' });
-      return;
-    }
-
-    const passwordHash = (user as any).password;
-    const isMatch = await bcrypt.compare(password, passwordHash);
-
-    if (!isMatch) {
-      res.status(401).json({ error: 'Credenciais inválidas' });
-      return;
-    }
-    
-    const secret = process.env.JWT_SECRET;
-
-    if (!secret) {
-      res.status(500).json({ error: 'JWT_SECRET não configurado' });
-      return;
-    }
-
-    const token = jwt.sign(
-      { id: (user as any).id, role: (user as any).role },
-      secret,
-      { expiresIn: '8h' }
-    );
-
-    res.json({ token, role: (user as any).role });
+    res.json(result);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro interno do servidor' });
+    handleError(err, res);
   }
 });
 
@@ -81,7 +63,7 @@ router.post('/login', validate(loginSchema), async (req: Request, res: Response)
  * Se o token for inválido/expirado: 401.
  * Se o usuário não for admin: 403.
  */
-router.get('/validate-admin', auth, rbac(['admin']), (req: Request, res: Response) => {
+router.get('/validate-admin', auth, rbac(['admin']), (_req: Request, res: Response) => {
   res.json({ valid: true });
 });
 
@@ -95,7 +77,7 @@ router.get(
   '/validate-secretary',
   auth,
   rbac(['secretary', 'admin']),
-  (req: Request, res: Response) => {
+  (_req: Request, res: Response) => {
     res.json({ valid: true });
   }
 );
