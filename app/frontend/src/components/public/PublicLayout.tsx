@@ -48,15 +48,15 @@ export default function PublicLayout() {
 
       <footer className="app-footer">
         <div className="app-footer__inner">
-          <div className="app-footer__info">
+          <a href="https://www.google.com/maps/place/R.+Faria+Lima,+155+-+Jardim+Santa+Maria,+Jacare%C3%AD+-+SP,+12328-070/data=!4m2!3m1!1s0x94cdcb423fe1ddb9:0x685289cc615f60a8?sa=X&ved=1t:242&ictx=111" target="_blank" className="app-footer__info">
             <p className="app-footer__info-title">Fatec Jacareí</p>
             <p>Av. Faria Lima, 155 - Jardim Santa Maria</p>
             <p>Jacareí/SP - CEP: 12328-070</p>
-          </div>
+          </a>
           <div className="Linha" />
           <div className="app-footer__contact">
             <p><span>Telefone:</span></p>
-            <p>(12) 3953-7926</p>
+            <p><a id="footer__tel"href="tel:+551239537926">(12) 3953-7926</a></p>
           </div>
           <div className="Linha" />
           <div className="app-footer__hours">

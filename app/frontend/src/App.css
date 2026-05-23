@@ -135,6 +135,18 @@ body {
   font-weight: 600;
 }
 
+.app-footer__info:hover {
+  color: #99f6e4;
+}
+
+.app-footer__info:hover .app-footer__info-title {
+  color: white;
+}
+
+#footer__tel:hover {
+  color: #99f6e4;
+}
+
 .app-footer__admin-link a {
   color: #ffffff;
   text-decoration: none;

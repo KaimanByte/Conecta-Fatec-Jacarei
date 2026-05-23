@@ -11,13 +11,14 @@ export default function ChatOptions({ nodes, loading, onSelect }: ChatOptionsPro
 
   return (
     <div className="nodes-grid">
-      {nodes.map((node) => (
+      {nodes.map((node, index) => (
         <button
           key={node.id}
           onClick={() => onSelect(node)}
           disabled={loading}
           className="node-button"
           type="button"
+          style={{ '--delay': `${0.08 + index * 0.05}s` } as React.CSSProperties}
         >
           {node.title}
         </button>
