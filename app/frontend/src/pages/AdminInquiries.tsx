@@ -139,7 +139,7 @@ const AdminInquiries = ({ setToken }: { setToken?: (value: string | null) => voi
                   ) : (
                     <div className="inq-answered-box">
                       <p className="inq-answered-label">
-                        Resposta Enviada em {new Date(inquiry.createdAt).toLocaleDateString()}:
+                        Respondido em {new Date(inquiry.createdAt).toLocaleDateString()}:
                       </p>
                       <p className="inq-answered-text">{inquiry.answerText}</p>
                     </div>
