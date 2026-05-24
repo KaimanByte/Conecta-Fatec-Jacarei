@@ -52,7 +52,7 @@ const AdminLayout = ({ children, setToken }: AdminLayoutProps) => {
             <span className="sidebar-logo">
               <img src="/fatec_jacarei.png" alt="Fatec Jacareí" />
             </span>
-            Secretária
+            Secretaria
           </h2>
         </div>
 
