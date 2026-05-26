@@ -47,7 +47,7 @@
 
 > Objetivo: autenticação real funcionando, administrador consegue gerenciar nós e usuários e sistema funciona bem no celular.
 
-**Total Sprint 2: 48 pts**
+**Total Sprint 2: 44 pts**
 
 
 | ID | Atividade | Pontos | Área | Requisito |
@@ -58,7 +58,6 @@
 | T12 | Montar o protótipo navegável no Figma com o fluxo completo do aluno | 3 | Design | RF01–RF07 |
 | T23 | Criar o serviço que grava o log de cada atendimento automaticamente | 3 | Backend | RF08 |
 | T24 | Criar a rota GET para o administrador consultar os logs | 2 | Backend | RF08 |
-| T25 | Criar as rotas CRUD de usuários do perfil secretária | 3 | Backend | RF04 |
 | T29 | Salvar a senha do usuário com hash bcrypt no banco | 2 | Auth | RF09, RNF09 |
 | T31 | Criar o middleware que verifica se o token JWT é válido em rotas protegidas | 3 | Auth | RF11 |
 | T32 | Criar o middleware que verifica o papel do usuário (admin, secretária) antes de liberar a rota | 3 | Auth | RF10 |
@@ -66,11 +65,13 @@
 | T41 | Salvar o token JWT no cliente após o login e redirecionar conforme o papel | 2 | Frontend | RF09 |
 | T42 | Bloquear o acesso a páginas protegidas se o usuário não estiver logado | 2 | Frontend | RF10, RF11 |
 | T45 | Criar a tela de gerenciamento de nós no painel do administrador | 3 | Frontend | RF04 |
-| T46 | Criar a tela de upload e gerenciamento de documentos no painel do administrador | 3 | Frontend | RF04 |
-| T47 | Criar a tela de gerenciamento de usuários (secretárias) no painel do administrador | 3 | Frontend | RF04 |
 | T48 | Criar a tela de visualização de logs no painel do administrador | 2 | Frontend | RF08 |
 | T49 | Garantir que todas as telas funcionem bem no celular (responsividade) | 3 | Frontend | RNF01 |
 | T51 | Desenhar o diagrama de classes | 3 | UML | RNF04 |
+| T27 | Criar a rota POST /auth/login que valida usuário e senha | 2 | Auth | RF09 |
+| T28 | Gerar o token JWT com ID do usuário, papel (role) e prazo de validade | 2 | Auth | RF09, RNF08 |
+| T30 | Criar o logout (remover o token no lado do cliente) | 1 | Auth | RF09 |
+
 
 
 ---
@@ -79,7 +80,7 @@
 
 > Objetivo: funcionalidade de busca em documentos entregue, autenticação totalmente finalizada, diagramas restantes e toda a documentação técnica prontos para apresentação.
 
-**Total Sprint 3: 37 pts**
+**Total Sprint 3: 41 pts**
 s
 
 | ID | Atividade | Pontos | Área | Requisito |
@@ -87,9 +88,6 @@ s
 | T16 | Criar a rota para fazer upload de documento e salvar no banco | 3 | Backend | RF02, RF04 |
 | T17 | Criar o serviço que divide o documento em partes menores para busca (chunks) | 5 | Backend | RF02 |
 | T18 | Criar a rota de busca que retorna os trechos relevantes de um documento | 3 | Backend | RF02 |
-| T27 | Criar a rota POST /auth/login que valida usuário e senha | 2 | Auth | RF09 |
-| T28 | Gerar o token JWT com ID do usuário, papel (role) e prazo de validade | 2 | Auth | RF09, RNF08 |
-| T30 | Criar o logout (remover o token no lado do cliente) | 1 | Auth | RF09 |
 | T52 | Desenhar o diagrama de sequência | 3 | UML | RNF04 |
 | T53 | Desenhar o diagrama de componentes | 3 | UML | RNF04 |
 | T54 | Escrever o documento de visão geral do projeto | 2 | Docs | RNF03 |
@@ -99,6 +97,10 @@ s
 | T58 | Escrever o README principal do repositório | 1 | Docs | RNF07 |
 | T59 | Escrever os READMEs das pastas backend e frontend com instruções de execução | 2 | Docs | RNF07 |
 | T60 | Documentar os testes unitários realizados no projeto | 3 | Docs | — |
+| T46 | Criar a tela de upload e gerenciamento de documentos no painel do administrador | 3 | Frontend | RF04 |
+| T47 | Criar a tela de gerenciamento de usuários (secretárias) no painel do administrador | 3 | Frontend | RF04 |
+| T25 | Criar as rotas CRUD de usuários do perfil secretária | 3 | Backend | RF04 |
+
 
 
 ---
