@@ -30,8 +30,8 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 
 | Sprint | Entrega       | Status |                 Relatório                  |                Apresentação                |
 |------: |---------------|:------:|:------------------------------------------:|:------------------------------------------:|
-| 1      | 📅 04/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint1.md) | - |
-| 2      | 📅 26/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint2.md) | - |
+| 1      | 📅 04/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint1.md) | [Apresentação](https://www.youtube.com/watch?v=7bFm-wabf_s) |
+| 2      | 📅 26/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint2.md) | [Apresentação](https://www.youtube.com/watch?v=TPTXaWIErNg) |
 | 3      | 📅 Em definição | `—`     | - | - |
 
 </div>
@@ -49,6 +49,8 @@ Detalhamento completo dos requisitos funcionais e não funcionais do projeto, in
 Lista completa de tasks do projeto, com identificador, descrição da atividade, pontuação em Fibonacci e rastreabilidade com os requisitos atendidos.
 - **Diagrama de Casos de Uso:** [Acesse aqui](./arquivos/produto/diagramas/CasoUso.png)  
 Representação visual das interações entre os atores do sistema e as principais funcionalidades da aplicação.
+- **Diagrama de Classes:** [Acesse aqui](./arquivos/produto/diagramas/DiagramaClasses.png)  
+Representação visual da estrutura principal do sistema, destacando as classes, seus atributos e responsabilidades dentro da aplicação.
 
 
 ## Stack
