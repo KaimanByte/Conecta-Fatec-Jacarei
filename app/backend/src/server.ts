@@ -10,6 +10,7 @@ import authRoutes from './routes/authRoutes.js';
 import nodeRoutes from './routes/nodeRoutes.js';
 import inquiryRoutes from './routes/inquiryRoutes.js';
 import logRoutes from './routes/logRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import { initMailer } from './utils/mailer.js';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger.js';
@@ -32,6 +33,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api', nodeRoutes);    // Mounts /chat/... and /admin/nodes...
 app.use('/api', inquiryRoutes); // Mounts /inquiries and /admin/inquiries...
 app.use('/api', logRoutes);     // Mounts /logs and /admin/logs...
+app.use('/api', userRoutes);    // Mounts /admin/users...
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // ─── Test routes ──────────────────────────────────────────────────────────────

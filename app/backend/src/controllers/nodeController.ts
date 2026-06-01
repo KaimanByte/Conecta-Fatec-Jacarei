@@ -1,22 +1,8 @@
 import { Request, Response } from 'express';
-import { AppError } from '../errors/AppError.js';
 import { NodeService } from '../services/NodeService.js';
+import { isInvalidId, handleError } from '../utils/controllerHelpers.js';
 
 const nodeService = new NodeService();
-
-const isInvalidId = (value: string | undefined): boolean => {
-  return value !== undefined && isNaN(Number(value));
-};
-
-const handleError = (err: unknown, res: Response, fallbackMessage = 'Erro interno do servidor') => {
-  if (err instanceof AppError) {
-    res.status(err.statusCode).json({ error: err.message });
-    return;
-  }
-
-  console.error(err);
-  res.status(500).json({ error: fallbackMessage });
-};
 
 export const listChatNodes = async (req: Request, res: Response) => {
   try {
