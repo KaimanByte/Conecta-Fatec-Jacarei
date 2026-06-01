@@ -25,6 +25,18 @@ export const answerSchema = z.object({
   answerText: z.string().min(5, 'A resposta deve ser mais detalhada')
 });
 
+export const createUserSchema = z.object({
+  email: z.string().email('E-mail inválido'),
+  password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres'),
+  role: z.enum(['admin', 'secretary'])
+});
+
+export const updateUserSchema = z.object({
+  email: z.string().email('E-mail inválido').optional(),
+  password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres').optional(),
+  role: z.enum(['admin', 'secretary']).optional()
+});
+
 // --- Middleware de Validação ---
 
 export const validate = (schema: z.ZodSchema) => (req: Request, res: Response, next: NextFunction) => {
