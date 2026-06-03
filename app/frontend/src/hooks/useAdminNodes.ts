@@ -27,8 +27,10 @@ export function useAdminNodes() {
     loadNodes();
   }, [search]);
 
-  const openCreateModal = () => {
-    setEditingNode({ title: '', content: '', parentId: null });
+  const openCreateModal = (id?: number | unknown) => {
+    const parentId = typeof id === 'number' ? id : null;
+
+    setEditingNode({ title: '', content: '', parentId });
     setIsModalOpen(true);
   };
 
