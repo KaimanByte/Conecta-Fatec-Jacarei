@@ -209,6 +209,15 @@ const AdminNodes = ({ setToken }: { setToken?: (value: string | null) => void })
 
           <div className="admin-nodes-actions-cell">
             <button
+              onClick={() => openCreateModal(node.id)}
+              className="admin-nodes-edit-button"
+              title="Editar"
+              type="button"
+            >
+              <Plus size={20} />
+            </button>
+
+            <button
               onClick={() => openEditModal(node)}
               className="admin-nodes-edit-button"
               title="Editar"
@@ -241,10 +250,11 @@ const AdminNodes = ({ setToken }: { setToken?: (value: string | null) => void })
           <p className="admin-nodes-subtitle">Organize a árvore de atendimento do chatbot</p>
         </div>
 
-        <button onClick={openCreateModal} className="admin-nodes-create-button" type="button">
+        <button onClick={() => openCreateModal()} className="admin-nodes-create-button" type="button">
           <Plus size={20} />
           NOVO CANAL
         </button>
+        
       </div>
 
       <div className="admin-nodes-search-wrapper">
