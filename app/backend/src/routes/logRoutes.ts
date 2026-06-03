@@ -29,8 +29,24 @@ const handleError = (err: unknown, res: Response) => {
  * @openapi
  * /api/logs:
  *   post:
- *     summary: Registra ou atualiza o fluxo de navegação de uma sessão (Nível Público)
+ *     summary: Registra ou atualiza o fluxo de navegação de uma sessão
  *     tags: [InteractionLogs]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - sessionId
+ *             properties:
+ *               sessionId:
+ *                 type: string
+ *               nodeId:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Log registrado com sucesso
  */
 router.post('/logs', async (req: Request, res: Response) => {
   try {
@@ -47,8 +63,31 @@ router.post('/logs', async (req: Request, res: Response) => {
  * @openapi
  * /api/logs/{sessionId}/satisfaction:
  *   post:
- *     summary: Registra a avaliação de satisfação de um atendimento (Nível Público)
+ *     summary: Registra a satisfação do usuário
  *     tags: [InteractionLogs]
+ *     parameters:
+ *       - in: path
+ *         name: sessionId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - satisfaction
+ *             properties:
+ *               satisfaction:
+ *                 type: string
+ *                 enum:
+ *                   - ATENDEU
+ *                   - NAO_ATENDEU
+ *     responses:
+ *       200:
+ *         description: Avaliação registrada
  */
 router.post('/logs/:sessionId/satisfaction', async (req: Request, res: Response) => {
   try {
