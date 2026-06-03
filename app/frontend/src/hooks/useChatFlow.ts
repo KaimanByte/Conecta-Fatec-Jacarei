@@ -55,33 +55,60 @@ export function useChatFlow() {
   }, [loadNodes]);
 
   const selectNode = async (node: ChatNode) => {
-    setMessages((currentMessages) => [...currentMessages, { type: 'user', text: node.title }]);
-    setLoading(true);
-    setNodes([]);
+  setMessages((currentMessages) => [
+    ...currentMessages,
+    { type: 'user', text: node.title }
+  ]);
 
-    try {
-      const selectedNode = await chatService.getNode(node.id);
-      await delay(1150);
+  setLoading(true);
+  setNodes([]);
 
-      if (selectedNode.content) addBotMessage(selectedNode.content, true);
+  try {
+    await chatService.registerNavigation(
+      sessionId,
+      node.id
+    );
 
-      setHistory((currentHistory) => [...currentHistory, { nodeId: node.id, title: node.title }]);
+    const selectedNode =
+      await chatService.getNode(node.id);
 
-      if (selectedNode.children?.length) {
-        addBotMessage('Selecione uma opção:');
-        await delay(300);
-        setNodes(selectedNode.children);
-      } else {
-        setNodes([]);
-        window.setTimeout(() => setPhase('satisfaction'), 600);
-      }
-    } catch {
-      addBotMessage('Erro ao carregar informação. Tente novamente.');
-      toast.error('Erro na comunicação com a API.');
-    } finally {
-      setLoading(false);
+    await delay(1150);
+
+    if (selectedNode.content) {
+      addBotMessage(selectedNode.content, true);
     }
-  };
+
+    setHistory((currentHistory) => [
+      ...currentHistory,
+      {
+        nodeId: node.id,
+        title: node.title
+      }
+    ]);
+
+    if (selectedNode.children?.length) {
+      addBotMessage('Selecione uma opção:');
+      await delay(300);
+      setNodes(selectedNode.children);
+    } else {
+      setNodes([]);
+      window.setTimeout(
+        () => setPhase('satisfaction'),
+        600
+      );
+    }
+  } catch {
+    addBotMessage(
+      'Erro ao carregar informação. Tente novamente.'
+    );
+
+    toast.error(
+      'Erro na comunicação com a API.'
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   const goBack = () => {
     if (history.length === 0) return;
