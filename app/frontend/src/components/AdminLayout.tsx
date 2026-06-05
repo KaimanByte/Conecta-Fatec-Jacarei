@@ -1,6 +1,15 @@
 import { type ReactNode, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ChevronRight, LayoutDashboard, ListTree, LogOut, MessageSquare } from 'lucide-react';
+import {
+  ChevronRight,
+  LayoutDashboard,
+  ListTree,
+  LogOut,
+  MessageSquare,
+  Moon,
+  Sun,
+  UserCog,
+} from 'lucide-react';
 import { authService } from '../services/authService';
 import { useTheme } from '../hooks/useTheme';
 import type { UserRole } from '../types';
@@ -14,13 +23,14 @@ const menuItems = [
   { name: 'Dúvidas', path: '/admin/inquiries', icon: <MessageSquare size={20} />, roles: ['secretary', 'admin'] as UserRole[] },
   { name: 'Gestão de Nós', path: '/admin', icon: <ListTree size={20} />, roles: ['admin'] as UserRole[] },
   { name: 'Dashboard', path: '/admin/logs', icon: <LayoutDashboard size={20} />, roles: ['admin'] as UserRole[] },
+  { name: 'Usuários', path: '/admin/users', icon: <UserCog size={20} />, roles: ['admin'] as UserRole[] },
 ];
 
 const AdminLayout = ({ children, setToken }: AdminLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  useTheme();
+  const { isDarkMode, setLightMode, setDarkMode } = useTheme();
 
   const userRole = useMemo<UserRole | null>(() => {
     const token = authService.getToken();
@@ -87,7 +97,34 @@ const AdminLayout = ({ children, setToken }: AdminLayoutProps) => {
       </button>
 
       <main className="admin-main">
-        <header className="admin-header" />
+        <header className="admin-header">
+          <h1 className="header-title">Painel Administrativo</h1>
+
+          <div className="header-actions">
+            <div className="theme-toggle" aria-label="Alternar tema">
+              <button
+                type="button"
+                className={`theme-btn ${!isDarkMode ? 'theme-btn--active-light' : ''}`}
+                onClick={setLightMode}
+                aria-label="Ativar tema claro"
+                title="Tema claro"
+              >
+                <Sun size={18} />
+              </button>
+
+              <button
+                type="button"
+                className={`theme-btn ${isDarkMode ? 'theme-btn--active-dark' : ''}`}
+                onClick={setDarkMode}
+                aria-label="Ativar tema escuro"
+                title="Tema escuro"
+              >
+                <Moon size={18} />
+              </button>
+            </div>
+          </div>
+        </header>
+
         <div className="admin-content">{children}</div>
       </main>
     </div>

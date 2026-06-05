@@ -7,6 +7,7 @@ import PrivateRoute from './components/PrivateRoute';
 import AdminNodes from './pages/AdminNodes';
 import AdminInquiries from './pages/AdminInquiries';
 import AdminLogs from './pages/AdminLogs';
+import AdminUsers from './pages/AdminUsers';
 
 function AppRoutes() {
   const { setSessionToken } = useAuth();
@@ -20,6 +21,7 @@ function AppRoutes() {
         <Route path="/admin" element={<AdminNodes setToken={setSessionToken} />} />
         <Route path="/admin/nodes" element={<AdminNodes setToken={setSessionToken} />} />
         <Route path="/admin/logs" element={<AdminLogs setToken={setSessionToken} />} />
+        <Route path="/admin/users" element={<AdminUsers setToken={setSessionToken} />} />
       </Route>
 
       <Route element={<PrivateRoute validator="secretary" setToken={setSessionToken} />}>
