@@ -13,6 +13,12 @@ export interface LoginResponse {
   token: string;
 }
 
+export interface AdminUser {
+  id: number;
+  email: string;
+  role: Extract<UserRole, 'admin' | 'secretary'>;
+}
+
 export interface ChatNode {
   id: number;
   title: string;
