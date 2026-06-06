@@ -129,6 +129,7 @@
 }
 
 .admin-nodes-tree-row {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -520,3 +521,13 @@
   background-color: #1e293b;
   color: white;
 }
+
+.admin-nodes-tree-row.selected {
+  background-color: rgba(178, 0, 0, 0.08);
+  border-left: 4px solid #b20000;
+}
+
+.dark .admin-nodes-tree-row.selected {
+  background-color: rgba(178, 0, 0, 0.15);
+}
+
