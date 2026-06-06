@@ -350,7 +350,7 @@ onDoubleClick={() => {
               </div>
 
     
-              <div className="admin-nodes-form-group">
+              {/*<div className="admin-nodes-form-group">
   <label>Pai (Subcanal de)</label>
   <div style={{ position: 'relative' }}>
     <button
@@ -493,6 +493,16 @@ onDoubleClick={() => {
            )}
   </div>
 </div> {/* FECHA admin-nodes-form-group */}
+<div className="admin-nodes-form-group">
+                <label htmlFor="node-content">Conteúdo do Canal (Resposta)</label>
+                <textarea
+                  id="node-content"
+                  className="admin-nodes-form-input admin-nodes-textarea"
+                  value={editingNode?.content || ''}
+                  onChange={(event) => updateEditingNode({ content: event.target.value })}
+                  placeholder="Explique o que acontece ao clicar neste canal..."
+                />
+              </div>
 
 <div className="admin-nodes-submit-wrapper">
   <button type="submit" className="admin-nodes-save-button">
