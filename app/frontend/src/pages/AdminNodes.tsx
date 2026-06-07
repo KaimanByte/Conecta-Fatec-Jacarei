@@ -219,13 +219,10 @@ const renderNode = (node: ChatNode, level = 0) => {
         <button
   type="button"
   className="admin-nodes-tree-expand-button"
-  onClick={() => {
-  handleSelect();
-}}
 
-onDoubleClick={() => {
+onClick={() => {
   if (hasChildren) {
-    toggleNode(node.id);
+    handleSelect(), toggleNode(node.id);
   }
 }}
   disabled={!hasChildren}
