@@ -68,13 +68,17 @@ export class NodeService {
     return { message: 'Nó atualizado' };
   }
 
-  async deleteNode(id: number) {
+  async deleteNode(id: number): Promise<{ message: string }> {
+    const children = await Node.findAll({ where: { parentId: id } });
+    if (children.length > 0) {
+      for (const child of children) {
+        await this.deleteNode(child.id);
+      }
+    }
     const count = await Node.destroy({ where: { id } });
-
     if (count === 0) {
       throw new AppError('Nó não encontrado', 404);
     }
-
-    return { message: 'Nó excluído' };
+    return { message: 'Nó e seus sub-nós excluídos com sucesso' };
   }
 }
