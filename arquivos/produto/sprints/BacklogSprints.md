@@ -80,26 +80,21 @@
 
 > Objetivo: funcionalidade de busca em documentos entregue, autenticação totalmente finalizada, diagramas restantes e toda a documentação técnica prontos para apresentação.
 
-**Total Sprint 3: 41 pts**
-s
+**Total Sprint 3: 28 pts**
+
 
 | ID | Atividade | Pontos | Área | Requisito |
 |----|-----------|:------:|------|-----------|
 | T16 | Criar a rota para fazer upload de documento e salvar no banco | 3 | Backend | RF02, RF04 |
 | T17 | Criar o serviço que divide o documento em partes menores para busca (chunks) | 5 | Backend | RF02 |
-| T18 | Criar a rota de busca que retorna os trechos relevantes de um documento | 3 | Backend | RF02 |
 | T52 | Desenhar o diagrama de sequência | 3 | UML | RNF04 |
 | T53 | Desenhar o diagrama de componentes | 3 | UML | RNF04 |
-| T54 | Escrever o documento de visão geral do projeto | 2 | Docs | RNF03 |
 | T55 | Documentar o modelo de dados com o diagrama ER | 2 | Docs | RNF03 |
-| T56 | Escrever a descrição da arquitetura do sistema | 2 | Docs | RNF03 |
 | T57 | Documentar todas as rotas e endpoints da API | 3 | Docs | RNF03 |
 | T58 | Escrever o README principal do repositório | 1 | Docs | RNF07 |
 | T59 | Escrever os READMEs das pastas backend e frontend com instruções de execução | 2 | Docs | RNF07 |
-| T60 | Documentar os testes unitários realizados no projeto | 3 | Docs | — |
 | T46 | Criar a tela de upload e gerenciamento de documentos no painel do administrador | 3 | Frontend | RF04 |
 | T47 | Criar a tela de gerenciamento de usuários (secretárias) no painel do administrador | 3 | Frontend | RF04 |
-| T25 | Criar as rotas CRUD de usuários do perfil secretária | 3 | Backend | RF04 |
 
 
 
@@ -111,5 +106,5 @@ s
 |--------|------|:-----:|:------:|
 | Sprint 1 | MVP — chatbot + painel da secretária + login | 26 | 51 |
 | Sprint 2 | Painel admin + autenticação + responsividade | 19 | 48 |
-| Sprint 3 | Documentos/chunks + auth finalizada + UML + docs | 15 | 37 |
+| Sprint 3 | Documentos/chunks + auth finalizada + UML + docs | 15 | 28 |
 | **Total** | | **60** | **136** |
