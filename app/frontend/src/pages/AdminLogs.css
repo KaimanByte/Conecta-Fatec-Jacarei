@@ -343,15 +343,15 @@
 }
 
 .dark .admin-logs-subtitle {
-  color: #9ca3af;
+  color: #d1d5db;
 }
 
 .dark .admin-logs-filter,
 .dark .admin-logs-stat-card,
 .dark .admin-logs-chart-card,
 .dark .admin-logs-table-card {
-  background-color: #0f172a;
-  border-color: #1e293b;
+  background-color: #002e38;
+  border-color: #005f72;
 }
 
 .dark .admin-logs-filter-button {
@@ -363,7 +363,7 @@
 }
 
 .dark .admin-logs-filter-button-active {
-  background-color: #4f46e5;
+  background-color: #7e0000;
   color: white;
 }
 
@@ -393,7 +393,7 @@
 
 .dark .admin-logs-table-header {
   background-color: rgba(30, 41, 59, 0.5);
-  border-bottom-color: #1e293b;
+  border-bottom-color: #005f72;
 }
 
 .dark .admin-logs-table-count {
@@ -402,7 +402,7 @@
 
 .dark .admin-logs-table thead tr {
   background-color: rgba(15, 23, 42, 0.5);
-  border-bottom-color: #1e293b;
+  border-bottom-color: #005f72;
 }
 
 .dark .admin-logs-table th {
@@ -410,7 +410,7 @@
 }
 
 .dark .admin-logs-table tbody tr + tr {
-  border-top-color: #1e293b;
+  border-top-color: #005f72;
 }
 
 .dark .admin-logs-table tbody tr:hover {
@@ -426,8 +426,8 @@
 }
 
 .dark .admin-logs-flow-tag {
-  background-color: #1e293b;
-  color: #9ca3af;
+  background-color: #005f72;
+  color: #d1d5db;
   border-color: #334155;
 }
 
@@ -442,5 +442,5 @@
 }
 
 .dark .admin-logs-not-rated {
-  color: #475569;
+  color: #d1d5db;
 }

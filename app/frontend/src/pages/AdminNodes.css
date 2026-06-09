@@ -33,7 +33,7 @@
 }
 
 .admin-nodes-create-button:hover {
-  background-color: #700000;
+  background-color: #7e0000;
 }
 
 .admin-nodes-create-button:active {
@@ -423,103 +423,145 @@
   transform: scale(0.95);
 }
 
-/* Dark mode */
+/* =====================
+   DARK MODE
+   Paleta:
+     #004854  — base das superfícies (60%)
+     #7E0000  — acentos, botões, seleção (30%)
+     #00D8E8  — destaques, textos de ação (10%)
+   ===================== */
 
 .dark .admin-nodes-title,
 .dark .admin-nodes-modal-title {
-  color: white;
+  color: #e8f8fa;
 }
 
 .dark .admin-nodes-subtitle {
-  color: #9ca3af;
+  color: #d1d5db;
 }
 
 .dark .admin-nodes-create-button,
 .dark .admin-nodes-save-button {
+  background-color: #7e0000;
   box-shadow: none;
 }
 
+.dark .admin-nodes-create-button:hover,
+.dark .admin-nodes-save-button:hover {
+  background-color: #7e0000;
+}
+
 .dark .admin-nodes-search-icon {
-  color: #6b7280;
+  color: #7ecdd6;
 }
 
 .dark .admin-nodes-search-input {
-  background-color: #0f172a;
-  color: white;
-  border-color: #1e293b;
+  background-color: #002e38;
+  color: #e8f8fa;
+  border-color: #005f72;
+}
+
+.dark .admin-nodes-search-input:focus {
+  box-shadow: 0 0 0 2px #00D8E8;
 }
 
 .dark .admin-nodes-card {
-  background-color: #0f172a;
-  border-color: #1e293b;
+  background-color: #003844;
+  border-color: #005f72;
 }
 
 .dark .admin-nodes-table-head-row {
-  background-color: rgba(30, 41, 59, 0.5);
-  border-bottom-color: #1e293b;
+  background-color: #002e38;
+  border-bottom-color: #005f72;
 }
 
 .dark .admin-nodes-table th {
-  color: #6b7280;
+  color: #7ecdd6;
 }
 
 .dark .admin-nodes-table tbody tr + tr {
-  border-top-color: #1e293b;
+  border-top-color: #005060;
 }
 
 .dark .admin-nodes-table-row:hover {
-  background-color: rgba(30, 41, 59, 0.3);
+  background-color: rgba(0, 216, 232, 0.05);
 }
 
 .dark .admin-nodes-expand-icon {
-  color: #475569;
+  color: #4a9eaa;
 }
 
 .dark .admin-nodes-node-title {
-  color: #e5e7eb;
+  color: #e8f8fa;
 }
 
 .dark .admin-nodes-node-id {
-  background-color: #1e293b;
-  color: #6b7280;
+  background-color: #002e38;
+  color: #7ecdd6;
 }
 
 .dark .admin-nodes-content-preview,
 .dark .admin-nodes-empty {
-  color: #9ca3af;
+  color: #7ecdd6;
 }
 
 .dark .admin-nodes-edit-button {
-  color: #818cf8;
+  color: #00D8E8;
 }
 
 .dark .admin-nodes-edit-button:hover {
-  background-color: rgba(49, 46, 129, 0.3);
+  background-color: rgba(0, 216, 232, 0.12);
+}
+
+.dark .admin-nodes-delete-button {
+  color: #f87171;
 }
 
 .dark .admin-nodes-delete-button:hover {
-  background-color: rgba(136, 19, 55, 0.3);
+  background-color: rgba(126, 0, 0, 0.3);
 }
 
 .dark .admin-nodes-modal-overlay {
-  background-color: rgba(2, 6, 23, 0.6);
+  background-color: rgba(0, 20, 25, 0.65);
 }
 
 .dark .admin-nodes-drawer {
-  background-color: #0f172a;
+  background-color: #003040;
+  border-left: 1px solid #005f72;
+}
+
+.dark .admin-nodes-close-button {
+  color: #7ecdd6;
 }
 
 .dark .admin-nodes-close-button:hover {
-  background-color: #1e293b;
+  background-color: #005060;
 }
 
 .dark .admin-nodes-form-group label {
-  color: #6b7280;
+  color: #7ecdd6;
 }
 
 .dark .admin-nodes-form-input {
-  background-color: #1e293b;
-  color: white;
+  background-color: #002e38;
+  color: #e8f8fa;
+  border: 1px solid #005060;
+}
+
+.dark .admin-nodes-form-input:focus {
+  box-shadow: 0 0 0 2px #00D8E8;
+}
+
+.dark .admin-nodes-tree-row {
+  border-bottom-color: rgba(0, 95, 114, 0.4);
+}
+
+.dark .admin-nodes-tree-row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .admin-nodes-tree-expand-button:hover:not(:disabled) {
+  background-color: rgba(0, 216, 232, 0.1);
 }
 
 .admin-nodes-tree-row.selected {
@@ -528,6 +570,19 @@
 }
 
 .dark .admin-nodes-tree-row.selected {
-  background-color: rgba(178, 0, 0, 0.15);
+  background-color: rgba(6, 0, 126, 0.25);
+  border-left: 4px solid #00D8E8;
 }
 
+
+.dark .admin-nodes-tree-expand-button, .dark .admin-nodes-tree-expand-button.expanded {
+  color: #ffffff;
+}
+
+.admin-nodes-tree-row.selected-with-children {
+  background: rgba(210, 0, 0, 0.08);
+}
+
+.dark .admin-nodes-tree-row.selected-with-children {
+  background: #00D8E830;
+}

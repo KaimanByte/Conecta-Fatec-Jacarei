@@ -345,6 +345,7 @@
   transition: all 0.2s ease;
 }
 
+
 .admin-users-save-button:hover {
   background-color: #700000;
 }
@@ -353,6 +354,13 @@
   transform: scale(0.95);
 }
 
+
+.dark .admin-users-save-button,
+.dark .admin-users-create-button {
+  background-color: #7e0000;
+}
+
+
 .dark .admin-users-title,
 .dark .admin-users-modal-title {
   color: white;
@@ -360,7 +368,7 @@
 
 .dark .admin-users-subtitle,
 .dark .admin-users-form-help {
-  color: #9ca3af;
+  color: #d1d5db;
 }
 
 .dark .admin-users-search-icon {
@@ -368,19 +376,19 @@
 }
 
 .dark .admin-users-search-input {
-  background-color: #0f172a;
+  background-color: #002e38;
   color: white;
-  border-color: #1e293b;
+  border-color: #005f72;
 }
 
 .dark .admin-users-card {
-  background-color: #0f172a;
-  border-color: #1e293b;
+  background-color: #002e38;
+  border-color: #005f72;
 }
 
 .dark .admin-users-table-head-row {
   background-color: rgba(30, 41, 59, 0.5);
-  border-bottom-color: #1e293b;
+  border-bottom-color: #005f72;
 }
 
 .dark .admin-users-table th,
@@ -389,7 +397,7 @@
 }
 
 .dark .admin-users-table tbody tr + tr {
-  border-top-color: #1e293b;
+  border-top-color: #005f72;
 }
 
 .dark .admin-users-table-row:hover {
@@ -398,7 +406,8 @@
 
 .dark .admin-users-user-icon,
 .dark .admin-users-id {
-  background-color: #1e293b;
+  background-color: #005f72;
+  color: #7ecdd6;
 }
 
 .dark .admin-users-email {
@@ -407,7 +416,7 @@
 
 .dark .admin-users-id,
 .dark .admin-users-empty {
-  color: #9ca3af;
+  color: #b7bdc9;
 }
 
 .dark .admin-users-role-badge--admin {
@@ -419,6 +428,8 @@
   background-color: rgba(49, 46, 129, 0.35);
   color: #a5b4fc;
 }
+
+
 
 .dark .admin-users-edit-button {
   color: #818cf8;
@@ -437,12 +448,12 @@
 }
 
 .dark .admin-users-drawer {
-  background-color: #0f172a;
+  background-color: #002e38;
 }
 
 .dark .admin-users-close-button:hover,
 .dark .admin-users-form-input {
-  background-color: #1e293b;
+  background-color: #005f72;
 }
 
 .dark .admin-users-form-input {

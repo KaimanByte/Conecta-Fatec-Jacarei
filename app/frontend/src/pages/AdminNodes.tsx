@@ -195,15 +195,17 @@ const renderNode = (node: ChatNode, level = 0) => {
 
   return (
     <div key={node.id} className="admin-nodes-tree-item">
-      <div
-        className="admin-nodes-tree-row"
-        style={{
-  paddingLeft: `${16 + level * 28}px`,
-  position: 'relative',
-  ...(selectedNodeIds.has(node.id) && hasChildren ? {
-  background: `linear-gradient(to right, transparent ${level === 0 ? 4 : (16 + level * 28) - 4}px, rgba(178, 0, 0, 0.06) ${level === 0 ? 4 : (16 + level * 28) - 4}px)`,
-} : {}),
-}}>
+    <div
+  className={`admin-nodes-tree-row ${
+    selectedNodeIds.has(node.id) && hasChildren
+      ? 'selected-with-children'
+      : ''
+  }`}
+  style={{
+    paddingLeft: `${16 + level * 28}px`,
+    position: 'relative',
+  }}
+>
        {isSelected && (
 <div style={{
   position: 'absolute',
@@ -227,7 +229,6 @@ onClick={() => {
 }}
   disabled={!hasChildren}
   title={hasChildren ? 'Expandir canal' : 'Sem subcanais'}
-  style={hasChildren ? { color: isExpanded ? 'inherit' : '#b20000' } : {}}
 >
           {hasChildren ? (
             isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />
@@ -283,7 +284,7 @@ onClick={() => {
 
         <button onClick={() => openCreateModal()} className="admin-nodes-create-button" type="button">
           <Plus size={20} />
-          NOVO CANAL
+          NOVA RAIZ
         </button>
         
       </div>
