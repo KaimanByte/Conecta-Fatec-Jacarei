@@ -249,6 +249,52 @@ footer2 img {
     display: none;
   }
 }
+
+/* ── HEADER MOBILE ── */
+@media (max-width: 600px) {
+  .app-header__logo-sp {
+    padding: 12px 20px;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+  }
+
+  .app-header__logo-sp img {
+    height: 28px;
+  }
+
+  .app-header__logo-fatec {
+    padding-right: 16px;
+  }
+
+  .app-header__logo-fatec img {
+    height: 48px;
+  }
+
+  #app-header__red-line {
+    top: 52px;
+  }
+}
+
+@media (max-width: 400px) {
+  .app-header__logo-sp {
+    padding: 10px 14px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
+
+  .app-header__logo-sp img {
+    height: 22px;
+  }
+
+  .app-header__logo-fatec img {
+    height: 40px;
+  }
+
+  #app-header__red-line {
+    top: 42px;
+  }
+}
+
 @media (max-width: 768px) {
   .app-footer__inner {
     flex-direction: column;
