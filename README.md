@@ -51,7 +51,8 @@ Lista completa de tasks do projeto, com identificador, descrição da atividade,
 Representação visual das interações entre os atores do sistema e as principais funcionalidades da aplicação.
 - **Diagrama de Classes:** [Acesse aqui](./arquivos/produto/diagramas/DiagramaClasses.png)  
 Representação visual da estrutura principal do sistema, destacando as classes, seus atributos e responsabilidades dentro da aplicação.
-
+- **Diagrama de Sêquencia:** [Acesse aqui](./arquivos/produto/diagramas/DiagramasSequencia.pdf)  
+Representação visual do fluxo de interação entre usuários, sistema e componentes da aplicação, demonstrando a ordem das mensagens trocadas e o comportamento do sistema durante a execução de cada funcionalidade.
 
 ## Stack
 
