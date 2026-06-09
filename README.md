@@ -32,7 +32,7 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 |------: |---------------|:------:|:------------------------------------------:|:------------------------------------------:|
 | 1      | 📅 04/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint1.md) | [Apresentação](https://www.youtube.com/watch?v=7bFm-wabf_s) |
 | 2      | 📅 26/05/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint2.md) | [Apresentação](https://www.youtube.com/watch?v=TPTXaWIErNg) |
-| 3      | 📅 Em definição | `—`     | - | - |
+| 3      | 📅 09/06/2026 | ✅     | [Sprint Review](./arquivos/produto/sprints/Sprint3.md) | [Apresentação](https://youtu.be/1fbtvei8AE8) |
 
 </div>
 
@@ -53,6 +53,9 @@ Representação visual das interações entre os atores do sistema e as principa
 Representação visual da estrutura principal do sistema, destacando as classes, seus atributos e responsabilidades dentro da aplicação.
 - **Diagrama de Sêquencia:** [Acesse aqui](./arquivos/produto/diagramas/DiagramasSequencia.pdf)  
 Representação visual do fluxo de interação entre usuários, sistema e componentes da aplicação, demonstrando a ordem das mensagens trocadas e o comportamento do sistema durante a execução de cada funcionalidade.
+- **Documentação de Testes:** [Acesse aqui](./arquivos/produto/DocumentacaoTestes.md)
+  Registro dos testes realizados no sistema, incluindo os cenários avaliados, funcionalidades verificadas, resultados obtidos e evidências de validação das principais entregas do projeto.
+
 
 ## Stack
 
